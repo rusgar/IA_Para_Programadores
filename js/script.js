@@ -163,11 +163,8 @@ function downloadPresentation() {
                 <button class="btn-secondary" onclick="closePdfPreview()">
                     ❌ Cancelar
                 </button>
-                <button class="btn-success" onclick="printPDF()">
-                    🖨️ Imprimir
-                </button>
-                <button class="btn-primary" onclick="downloadPDF()">
-                    📥 Guardar como PDF
+                <button class="btn-primary" onclick="printPDF()">
+                    📥 Descargar PDF
                 </button>
             </div>
         </div>
@@ -214,7 +211,7 @@ function closePdfPreview() {
     }
 }
 
-// Imprimir PDF
+// Imprimir PDF (función principal)
 function printPDF() {
     // Añadir clase para imprimir
     document.body.classList.add('printing-mode');
@@ -236,46 +233,6 @@ function printPDF() {
         window.print();
         
         // Restaurar después de imprimir
-        setTimeout(() => {
-            document.body.classList.remove('printing-mode');
-            
-            // Ocultar todas las slides excepto la actual
-            allSlides.forEach((slide, index) => {
-                if (index !== currentSlideIndex) {
-                    slide.classList.remove('active');
-                }
-            });
-            
-            // Mostrar modal nuevamente
-            if (modal) {
-                modal.style.display = 'flex';
-            }
-        }, 500);
-    }, 300);
-}
-
-// Descargar como PDF (usando print con configuración)
-function downloadPDF() {
-    // Añadir clase para imprimir
-    document.body.classList.add('printing-mode');
-    
-    // Mostrar todas las slides
-    const allSlides = document.querySelectorAll('.slide');
-    allSlides.forEach(slide => {
-        slide.classList.add('active');
-    });
-    
-    // Cerrar modal
-    const modal = document.getElementById('pdfPreviewModal');
-    if (modal) {
-        modal.style.display = 'none';
-    }
-    
-    // Abrir diálogo de impresión (el usuario seleccionará "Guardar como PDF")
-    setTimeout(() => {
-        window.print();
-        
-        // Restaurar después de cerrar el diálogo
         setTimeout(() => {
             document.body.classList.remove('printing-mode');
             
