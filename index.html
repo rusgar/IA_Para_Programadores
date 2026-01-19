@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 1: Fundamentos de IA en Programación</title>
+    
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Módulo 1: Fundamentos de IA en Programación</h1>
+            <p>Formación Profesional - 30 Horas</p>
+        </div>
+
+        <div class="controls">
+            <div class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
+            </div>
+            <div class="btn-group">
+                <button class="btn-success" onclick="downloadPresentation()">
+                    📥 Descargar PDF
+                </button>
+                <button class="btn-primary" onclick="window.print()">
+                    🖨️ Imprimir
+                </button>
+            </div>
+        </div>
+
+        <div class="slides-container">
+            <!-- Slide 1: Portada -->
+            <div class="slide active">
+                <h2>🎯 Bienvenida al Módulo 1</h2>
+                <div class="highlight-box">
+                    <h3 style="color: white; margin-top: 0;">Objetivos del Módulo</h3>
+                    <ul style="margin-bottom: 0;">
+                        <li>Comprender el impacto de la IA en el desarrollo de software moderno</li>
+                        <li>Dominar las principales herramientas de asistencia basadas en IA</li>
+                        <li>Diferenciar entre IA y automatización tradicional</li>
+                        <li>Conocer los aspectos éticos y legales del código generado por IA</li>
+                    </ul>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="number">30h</div>
+                        <div class="label">Duración Total</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">4</div>
+                        <div class="label">Temas Principales</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">10</div>
+                        <div class="label">Herramientas IA</div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡 Nota Importante:</strong> Este módulo sienta las bases para todos los módulos posteriores. Es fundamental comprender estos conceptos antes de avanzar.
+                </div>
+            </div>
+
+            <!-- Slide 2: Introducción a la IA -->
+            <div class="slide">
+                <h2>1️⃣ Introducción a la IA y su Impacto</h2>
+                
+                <h3>¿Qué es la Inteligencia Artificial?</h3>
+                <p>La IA es la capacidad de las máquinas para realizar tareas que normalmente requieren inteligencia humana, como el aprendizaje, el razonamiento y la resolución de problemas.</p>
+
+                <div class="info-box">
+                    <h4>Tipos de IA Relevantes para Programadores:</h4>
+                    <ul>
+                        <li><strong>Machine Learning:</strong> Sistemas que aprenden de datos</li>
+                        <li><strong>Deep Learning:</strong> Redes neuronales profundas</li>
+                        <li><strong>NLP (Procesamiento de Lenguaje Natural):</strong> Comprensión y generación de texto</li>
+                        <li><strong>IA Generativa:</strong> Creación de código, texto e imágenes</li>
+                    </ul>
+                </div>
+
+                <h3>Impacto en el Desarrollo de Software</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="number">55%</div>
+                        <div class="label">Desarrolladores usan IA (2024)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">30-50%</div>
+                        <div class="label">Aumento en productividad</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">40%</div>
+                        <div class="label">Reducción de tiempo en debugging</div>
+                    </div>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📺 Video: IA en Desarrollo</h4>
+                        <p>Introducción completa al impacto de la IA</p>
+                        <a href="https://www.youtube.com/watch?v=JhCl-GeT4jw" target="_blank">Ver en YouTube →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>📚 Lectura: Estado del Arte</h4>
+                        <p>Informe de GitHub sobre adopción de IA</p>
+                        <a href="https://github.blog/ai-and-ml/" target="_blank">Leer más →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: GitHub Copilot -->
+            <div class="slide">
+                <h2>2️⃣ GitHub Copilot - Tu Copiloto de Código</h2>
+                
+                <div class="tool-showcase">
+                    <div class="tool-item">
+                        <h4>🚀 GitHub Copilot</h4>
+                        <p><strong>Desarrollado por:</strong> GitHub + OpenAI</p>
+                        <p><strong>Basado en:</strong> Codex (GPT-3.5/4)</p>
+                        <p><strong>Precio:</strong> $10/mes individual, $19/mes Business</p>
+                    </div>
+                </div>
+
+                <h3>Características Principales</h3>
+                <ul>
+                    <li><strong>Autocompletado inteligente:</strong> Sugiere líneas completas y bloques de código</li>
+                    <li><strong>Comprensión de contexto:</strong> Analiza todo tu archivo y proyecto</li>
+                    <li><strong>Multi-lenguaje:</strong> Compatible con Python, JavaScript, TypeScript, Ruby, Go, C++, y más</li>
+                    <li><strong>Generación desde comentarios:</strong> Escribe la función basándose en tu descripción</li>
+                    <li><strong>Testing automático:</strong> Genera pruebas unitarias</li>
+                </ul>
+
+                <div class="success-box">
+                    <h4>✅ Casos de Uso Principales:</h4>
+                    <ul>
+                        <li>Escribir funciones boilerplate rápidamente</li>
+                        <li>Completar patrones de código repetitivos</li>
+                        <li>Sugerir implementaciones de algoritmos</li>
+                        <li>Generar documentación y comentarios</li>
+                        <li>Crear pruebas unitarias automáticamente</li>
+                    </ul>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📺 Tutorial Oficial</h4>
+                        <p>Cómo empezar con GitHub Copilot</p>
+                        <a href="https://www.youtube.com/watch?v=Ti_3SqJ2dx8" target="_blank">Ver tutorial →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>📖 Documentación</h4>
+                        <p>Guía completa de GitHub Copilot</p>
+                        <a href="https://docs.github.com/en/copilot" target="_blank">Leer docs →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🎓 Curso Gratuito</h4>
+                        <p>Aprende a usar Copilot efectivamente</p>
+                        <a href="https://github.com/skills/copilot" target="_blank">Comenzar curso →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: ChatGPT y OpenAI -->
+            <div class="slide">
+                <h2>2️⃣ ChatGPT para Programadores</h2>
+                
+                <div class="tool-showcase">
+                    <div class="tool-item">
+                        <h4>💬 ChatGPT</h4>
+                        <p><strong>Desarrollado por:</strong> OpenAI</p>
+                        <p><strong>Modelos:</strong> GPT-3.5 (gratis), GPT-4 (Plus)</p>
+                        <p><strong>Precio:</strong> Gratis / $20/mes Plus</p>
+                    </div>
+                </div>
+
+                <h3>Aplicaciones en Programación</h3>
+                <ol>
+                    <li><strong>Explicación de código:</strong> Pega código complejo y obtén explicaciones detalladas</li>
+                    <li><strong>Debugging:</strong> Describe el error y recibe soluciones</li>
+                    <li><strong>Refactorización:</strong> Solicita mejoras en estructura y rendimiento</li>
+                    <li><strong>Generación de código:</strong> Describe la funcionalidad que necesitas</li>
+                    <li><strong>Conversión entre lenguajes:</strong> Traduce código de Python a JavaScript</li>
+                    <li><strong>Aprendizaje:</strong> Pregunta sobre conceptos, patrones y mejores prácticas</li>
+                </ol>
+
+                <div class="warning-box">
+                    <h4>⚠️ Limitaciones Importantes:</h4>
+                    <ul>
+                        <li>No tiene acceso a internet (versión base)</li>
+                        <li>Conocimiento cortado en fecha específica</li>
+                        <li>Puede generar código con errores sutiles</li>
+                        <li>No ejecuta ni prueba el código generado</li>
+                        <li>Requiere validación humana siempre</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h4>💡 Mejores Prácticas con ChatGPT:</h4>
+                    <ul>
+                        <li>Sé específico en tus prompts</li>
+                        <li>Proporciona contexto completo</li>
+                        <li>Pide explicaciones junto con el código</li>
+                        <li>Solicita alternativas y comparaciones</li>
+                        <li>Valida y prueba todo el código generado</li>
+                    </ul>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📺 ChatGPT para Devs</h4>
+                        <p>Guía completa de uso en programación</p>
+                        <a href="https://www.youtube.com/watch?v=VznoKyh6AXs" target="_blank">Ver video →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🎯 Prompts Efectivos</h4>
+                        <p>Aprende a hacer mejores preguntas</p>
+                        <a href="https://platform.openai.com/docs/guides/prompt-engineering" target="_blank">Guía de prompts →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: AWS CodeWhisperer y otras herramientas -->
+            <div class="slide">
+                <h2>2️⃣ AWS CodeWhisperer y Otras Herramientas</h2>
+                
+                <div class="tool-showcase">
+                    <div class="tool-item">
+                        <h4>☁️ AWS CodeWhisperer</h4>
+                        <p><strong>Especializado en:</strong> AWS Services</p>
+                        <p><strong>Precio:</strong> GRATIS (Individual)</p>
+                    </div>
+                    <div class="tool-item">
+                        <h4>🔷 Tabnine</h4>
+                        <p><strong>Enfoque:</strong> Privacidad y seguridad</p>
+                        <p><strong>Precio:</strong> Gratis / $12/mes Pro</p>
+                    </div>
+                </div>
+
+                <h3>Comparativa de Herramientas IA</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Herramienta</th>
+                            <th>Ventajas</th>
+                            <th>Ideal Para</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>GitHub Copilot</strong></td>
+                            <td>Mejor integración con VS Code, más preciso</td>
+                            <td>Desarrollo general, proyectos completos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ChatGPT</strong></td>
+                            <td>Conversacional, explicaciones detalladas</td>
+                            <td>Aprendizaje, debugging, consultas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CodeWhisperer</strong></td>
+                            <td>Gratis, optimizado para AWS</td>
+                            <td>Proyectos AWS, infraestructura cloud</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tabnine</strong></td>
+                            <td>Privacidad, modelo local opcional</td>
+                            <td>Empresas con requisitos de seguridad</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Codeium</strong></td>
+                            <td>Gratis ilimitado, multilenguaje</td>
+                            <td>Estudiantes, proyectos personales</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>🎥 CodeWhisperer Tutorial</h4>
+                        <p>Configuración e introducción</p>
+                        <a href="https://www.youtube.com/watch?v=rHNMfOK6b_o" target="_blank">Ver tutorial →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>📊 Comparativa Completa</h4>
+                        <p>Análisis detallado de herramientas</p>
+                        <a href="https://github.blog/2023-06-27-the-economic-impact-of-the-ai-powered-developer-lifecycle-and-lessons-from-github-copilot/" target="_blank">Leer análisis →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: IA vs Automatización -->
+            <div class="slide">
+                <h2>3️⃣ IA vs. Automatización Tradicional</h2>
+                
+                <h3>Diferencias Fundamentales</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspecto</th>
+                            <th>Automatización Tradicional</th>
+                            <th>Inteligencia Artificial</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Reglas</strong></td>
+                            <td>Predefinidas y fijas</td>
+                            <td>Aprende de datos y se adapta</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Flexibilidad</strong></td>
+                            <td>Limitada a casos programados</td>
+                            <td>Maneja situaciones nuevas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Complejidad</strong></td>
+                            <td>Tareas repetitivas simples</td>
+                            <td>Problemas complejos y ambiguos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mejora</strong></td>
+                            <td>Requiere reprogramación manual</td>
+                            <td>Mejora con más datos y uso</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ejemplos</strong></td>
+                            <td>Scripts, macros, linters básicos</td>
+                            <td>Copilot, análisis de código, predicción</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Sinergias: IA + Automatización</h3>
+                <div class="success-box">
+                    <h4>🔄 Casos donde se complementan:</h4>
+                    <ol>
+                        <li><strong>CI/CD Inteligente:</strong> Automatización de pipelines + IA para detectar fallos antes de despliegue</li>
+                        <li><strong>Testing Automatizado:</strong> Ejecución automática + IA generando casos de prueba</li>
+                        <li><strong>Code Review:</strong> Herramientas automáticas + IA sugiriendo mejoras de calidad</li>
+                        <li><strong>Refactorización:</strong> Scripts automáticos + IA optimizando lógica de negocio</li>
+                        <li><strong>Documentación:</strong> Generación automática + IA creando descripciones contextuales</li>
+                    </ol>
+                </div>
+
+                <div class="info-box">
+                    <h4>📌 Principio Clave:</h4>
+                    <p><strong>La automatización ejecuta tareas predecibles, la IA toma decisiones inteligentes.</strong> Juntas crean flujos de trabajo poderosos donde la automatización maneja la ejecución y la IA aporta inteligencia contextual.</p>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📚 Artículo: IA en DevOps</h4>
+                        <p>Cómo la IA transforma la automatización</p>
+                        <a href="https://www.redhat.com/en/topics/devops/what-is-aiops" target="_blank">Leer más →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Aspectos Éticos Parte 1 -->
+            <div class="slide">
+                <h2>4️⃣ Aspectos Éticos y Legales (Parte 1)</h2>
+                
+                <h3>Propiedad Intelectual del Código Generado</h3>
+                <div class="warning-box">
+                    <h4>⚖️ Preguntas Legales Importantes:</h4>
+                    <ul>
+                        <li>¿Quién es el autor del código generado por IA?</li>
+                        <li>¿Puedo usar código de IA en proyectos comerciales?</li>
+                        <li>¿La IA puede infringir licencias de código existente?</li>
+                        <li>¿Qué sucede si la IA reproduce código protegido?</li>
+                    </ul>
+                </div>
+
+                <h3>Marco Legal Actual (2024-2025)</h3>
+                <div class="info-box">
+                    <h4>🌍 Situación por Región:</h4>
+                    <ul>
+                        <li><strong>Unión Europea:</strong> AI Act regula el uso de IA, enfoque en transparencia y derechos de autor</li>
+                        <li><strong>Estados Unidos:</strong> Casos legales en curso (GitHub Copilot lawsuit), aún sin regulación clara</li>
+                        <li><strong>España:</strong> Aplicación del AI Act europeo + normativa nacional en desarrollo</li>
+                    </ul>
+                </div>
+
+                <h3>Políticas de las Principales Herramientas</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Herramienta</th>
+                            <th>Política de Propiedad</th>
+                            <th>Responsabilidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>GitHub Copilot</strong></td>
+                            <td>El código sugerido es tuyo</td>
+                            <td>GitHub no asume responsabilidad por infracciones</td>
+                        </tr>
+                        <tr>
+                            <td><strong>OpenAI (ChatGPT)</strong></td>
+                            <td>Usuario posee el output generado</td>
+                            <td>Usuario responsable del uso legal</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AWS CodeWhisperer</strong></td>
+                            <td>Código generado pertenece al usuario</td>
+                            <td>AWS ofrece filtro de referencias de código</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📖 Legislación EU</h4>
+                        <p>AI Act - Regulación Europea de IA</p>
+                        <a href="https://artificialintelligenceact.eu/" target="_blank">Consultar normativa →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>⚖️ Caso GitHub</h4>
+                        <p>Demanda colectiva contra Copilot</p>
+                        <a href="https://githubcopilotlitigation.com/" target="_blank">Detalles del caso →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Aspectos Éticos Parte 2 -->
+            <div class="slide">
+                <h2>4️⃣ Aspectos Éticos y Legales (Parte 2)</h2>
+                
+                <h3>Consideraciones Éticas Principales</h3>
+                
+                <div class="highlight-box">
+                    <h4 style="color: white; margin-top: 0;">🎯 Principios Éticos del Desarrollador IA</h4>
+                    <ol style="margin-bottom: 0;">
+                        <li><strong>Transparencia:</strong> Declarar cuando el código fue generado/asistido por IA</li>
+                        <li><strong>Responsabilidad:</strong> Revisar, entender y validar todo código antes de usar</li>
+                        <li><strong>Privacidad:</strong> No compartir datos sensibles con herramientas IA</li>
+                        <li><strong>Sesgo:</strong> Ser consciente de posibles sesgos en el código generado</li>
+                        <li><strong>Calidad:</strong> No depender exclusivamente de IA para código crítico</li>
+                    </ol>
+                </div>
+
+                <h3>⚠️ Riesgos de Seguridad y Privacidad</h3>
+                <div class="warning-box">
+                    <h4>Datos que NUNCA debes compartir con IA:</h4>
+                    <ul>
+                        <li>Claves API, tokens de autenticación, passwords</li>
+                        <li>Información personal identificable (PII) de usuarios</li>
+                        <li>Código propietario bajo NDA</li>
+                        <li>Datos de producción o clientes reales</li>
+                        <li>Información financiera o médica sensible</li>
+                    </ul>
+                </div>
+
+                <h3>Mejores Prácticas de Uso Responsable</h3>
+                <div class="success-box">
+                    <h4>✅ Checklist de Ética en IA:</h4>
+                    <ul>
+                        <li>☑️ Revi
