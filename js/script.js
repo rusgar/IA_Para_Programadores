@@ -108,6 +108,9 @@ function updateButtons() {
 
 // Navegación con teclado
 document.addEventListener('keydown', function(event) {
+    // No ejecutar si hay un modal abierto
+    if (document.getElementById('pdfPreviewModal')) return;
+    
     switch(event.key) {
         case 'ArrowLeft':
             changeSlide(-1);
@@ -124,84 +127,185 @@ document.addEventListener('keydown', function(event) {
             showSlide(totalSlides - 1);
             break;
         case 'Escape':
-            // Opcional: salir de pantalla completa
-            if (document.fullscreenElement) {
+            // Cerrar modal si está abierto
+            const modal = document.getElementById('pdfPreviewModal');
+            if (modal) {
+                closePdfPreview();
+            } else if (document.fullscreenElement) {
                 document.exitFullscreen();
             }
             break;
     }
 });
 
-// Función para descargar como PDF
+// Función para mostrar vista previa antes de descargar PDF
 function downloadPresentation() {
-    // Mostrar mensaje de preparación
-    const originalContent = document.body.innerHTML;
+    // Crear modal de vista previa
+    const modal = document.createElement('div');
+    modal.id = 'pdfPreviewModal';
+    modal.className = 'pdf-preview-modal';
     
-    // Crear overlay de carga
-    const overlay = document.createElement('div');
-    overlay.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.8);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        color: white;
-        font-size: 1.5em;
-        flex-direction: column;
-    `;
-    overlay.innerHTML = `
-        <div style="text-align: center;">
-            <div style="font-size: 3em; margin-bottom: 20px;">📄</div>
-            <div>Preparando presentación para PDF...</div>
-            <div style="font-size: 0.8em; margin-top: 10px; opacity: 0.7;">
-                Se abrirá el diálogo de impresión
+    modal.innerHTML = `
+        <div class="pdf-preview-content">
+            <div class="pdf-preview-header">
+                <h2>📄 Vista Previa - Módulo 1: Fundamentos de IA en Programación</h2>
+                <button class="close-preview" onclick="closePdfPreview()">✖️</button>
+            </div>
+            
+            <div class="pdf-preview-body" id="pdfPreviewBody">
+                <div class="loading-preview">
+                    <div class="spinner"></div>
+                    <p>Generando vista previa...</p>
+                </div>
+            </div>
+            
+            <div class="pdf-preview-footer">
+                <button class="btn-secondary" onclick="closePdfPreview()">
+                    ❌ Cancelar
+                </button>
+                <button class="btn-success" onclick="printPDF()">
+                    🖨️ Imprimir
+                </button>
+                <button class="btn-primary" onclick="downloadPDF()">
+                    📥 Guardar como PDF
+                </button>
             </div>
         </div>
     `;
-    document.body.appendChild(overlay);
-
-    // Preparar para impresión (mostrar todas las slides)
+    
+    document.body.appendChild(modal);
+    
+    // Generar vista previa después de un momento
     setTimeout(() => {
-        slides.forEach(slide => {
-            slide.classList.add('active');
-        });
+        generatePreview();
+    }, 300);
+}
 
-        // Esperar un momento para que se rendericen todas las slides
+// Generar vista previa de todas las slides
+function generatePreview() {
+    const previewBody = document.getElementById('pdfPreviewBody');
+    const allSlides = document.querySelectorAll('.slide');
+    
+    let previewHTML = '<div class="preview-slides-container">';
+    
+    allSlides.forEach((slide, index) => {
+        previewHTML += `
+            <div class="preview-slide-wrapper">
+                <div class="preview-slide-number">Diapositiva ${index + 1} de ${totalSlides}</div>
+                <div class="preview-slide">
+                    ${slide.innerHTML}
+                </div>
+            </div>
+        `;
+    });
+    
+    previewHTML += '</div>';
+    previewBody.innerHTML = previewHTML;
+}
+
+// Cerrar vista previa
+function closePdfPreview() {
+    const modal = document.getElementById('pdfPreviewModal');
+    if (modal) {
+        modal.classList.add('closing');
         setTimeout(() => {
-            // Abrir diálogo de impresión
-            window.print();
-
-            // Restaurar estado después de cerrar el diálogo
-            setTimeout(() => {
-                // Remover overlay
-                document.body.removeChild(overlay);
-                
-                // Ocultar todas las slides excepto la actual
-                slides.forEach((slide, index) => {
-                    if (index !== currentSlideIndex) {
-                        slide.classList.remove('active');
-                    }
-                });
-            }, 500);
+            modal.remove();
         }, 300);
-    }, 500);
+    }
+}
+
+// Imprimir PDF
+function printPDF() {
+    // Añadir clase para imprimir
+    document.body.classList.add('printing-mode');
+    
+    // Mostrar todas las slides
+    const allSlides = document.querySelectorAll('.slide');
+    allSlides.forEach(slide => {
+        slide.classList.add('active');
+    });
+    
+    // Cerrar modal
+    const modal = document.getElementById('pdfPreviewModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+    
+    // Esperar un momento y abrir diálogo de impresión
+    setTimeout(() => {
+        window.print();
+        
+        // Restaurar después de imprimir
+        setTimeout(() => {
+            document.body.classList.remove('printing-mode');
+            
+            // Ocultar todas las slides excepto la actual
+            allSlides.forEach((slide, index) => {
+                if (index !== currentSlideIndex) {
+                    slide.classList.remove('active');
+                }
+            });
+            
+            // Mostrar modal nuevamente
+            if (modal) {
+                modal.style.display = 'flex';
+            }
+        }, 500);
+    }, 300);
+}
+
+// Descargar como PDF (usando print con configuración)
+function downloadPDF() {
+    // Añadir clase para imprimir
+    document.body.classList.add('printing-mode');
+    
+    // Mostrar todas las slides
+    const allSlides = document.querySelectorAll('.slide');
+    allSlides.forEach(slide => {
+        slide.classList.add('active');
+    });
+    
+    // Cerrar modal
+    const modal = document.getElementById('pdfPreviewModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+    
+    // Abrir diálogo de impresión (el usuario seleccionará "Guardar como PDF")
+    setTimeout(() => {
+        window.print();
+        
+        // Restaurar después de cerrar el diálogo
+        setTimeout(() => {
+            document.body.classList.remove('printing-mode');
+            
+            // Ocultar todas las slides excepto la actual
+            allSlides.forEach((slide, index) => {
+                if (index !== currentSlideIndex) {
+                    slide.classList.remove('active');
+                }
+            });
+            
+            // Cerrar modal completamente
+            closePdfPreview();
+        }, 500);
+    }, 300);
 }
 
 // Detectar cuando se cierra el diálogo de impresión
 window.addEventListener('afterprint', function() {
+    const allSlides = document.querySelectorAll('.slide');
+    
     // Restaurar solo la slide actual
-    slides.forEach((slide, index) => {
+    allSlides.forEach((slide, index) => {
         if (index === currentSlideIndex) {
             slide.classList.add('active');
         } else {
             slide.classList.remove('active');
         }
     });
+    
+    document.body.classList.remove('printing-mode');
 });
 
 // Soporte para gestos táctiles en móviles
@@ -218,15 +322,13 @@ document.addEventListener('touchend', function(event) {
 }, false);
 
 function handleSwipe() {
-    const swipeThreshold = 50; // Mínimo de píxeles para considerar un swipe
+    const swipeThreshold = 50;
     
     if (touchEndX < touchStartX - swipeThreshold) {
-        // Swipe izquierda - siguiente slide
         changeSlide(1);
     }
     
     if (touchEndX > touchStartX + swipeThreshold) {
-        // Swipe derecha - slide anterior
         changeSlide(-1);
     }
 }
@@ -244,9 +346,9 @@ function toggleFullscreen() {
     }
 }
 
-// Atajo de teclado para pantalla completa (F11 o F)
+// Atajo de teclado para pantalla completa (F)
 document.addEventListener('keydown', function(event) {
-    if (event.key === 'f' || event.key === 'F') {
+    if ((event.key === 'f' || event.key === 'F') && !document.getElementById('pdfPreviewModal')) {
         toggleFullscreen();
     }
 });
@@ -256,11 +358,11 @@ document.addEventListener('gesturestart', function(e) {
     e.preventDefault();
 });
 
-// Información de ayuda (opcional)
+// Información de ayuda
 function showHelp() {
     const helpText = `
 🎯 ATAJOS DE TECLADO:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 → o Espacio    : Siguiente slide
 ← : Anterior slide
 Inicio         : Primera slide
@@ -269,7 +371,7 @@ F              : Pantalla completa
 Esc            : Salir pantalla completa
 
 📱 EN MÓVIL:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Desliza izquierda  : Siguiente
 Desliza derecha    : Anterior
     `;
@@ -277,7 +379,7 @@ Desliza derecha    : Anterior
     alert(helpText);
 }
 
-// Opcional: Añadir botón de ayuda
+// Añadir botón de ayuda
 document.addEventListener('DOMContentLoaded', function() {
     const controls = document.querySelector('.controls');
     if (controls) {
