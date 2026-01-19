@@ -143,6 +143,13 @@ button {
     margin-bottom: 15px;
 }
 
+.slide h4 {
+    color: #495057;
+    font-size: 1.3em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
 .slide p,
 .slide li {
     font-size: 1.1em;
@@ -313,28 +320,285 @@ button {
     margin-top: 10px;
 }
 
+/* Estilos para el modal de vista previa PDF */
+.pdf-preview-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.pdf-preview-modal.closing {
+    animation: modalFadeOut 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalFadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.pdf-preview-content {
+    background: white;
+    width: 95%;
+    height: 95%;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.pdf-preview-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pdf-preview-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+    border: none;
+}
+
+.close-preview {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: all 0.3s ease;
+}
+
+.close-preview:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.pdf-preview-body {
+    flex: 1;
+    overflow-y: auto;
+    background: #f5f5f5;
+    padding: 20px;
+}
+
+.loading-preview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #667eea;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #e9ecef;
+    border-top: 5px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.preview-slides-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.preview-slide-wrapper {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.preview-slide-number {
+    background: #667eea;
+    color: white;
+    padding: 10px 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.preview-slide {
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pdf-preview-footer {
+    background: #f8f9fa;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    border-top: 2px solid #e9ecef;
+}
+
+/* Estilos para impresión - MANTIENE EL DISEÑO ORIGINAL */
 @media print {
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
     body {
         background: white;
         padding: 0;
+        margin: 0;
     }
 
+    /* Ocultar elementos de navegación */
     .controls,
     .navigation,
-    button {
+    button,
+    .pdf-preview-modal {
         display: none !important;
-    }
-
-    .slide {
-        display: block !important;
-        page-break-after: always;
     }
 
     .container {
         box-shadow: none;
+        border-radius: 0;
+        max-width: 100%;
+    }
+
+    .header {
+        border-radius: 0;
+    }
+
+    /* Mostrar todas las slides en impresión */
+    .slide {
+        display: block !important;
+        page-break-after: always;
+        page-break-inside: avoid;
+    }
+
+    /* Evitar que la última slide tenga página extra */
+    .slide:last-child {
+        page-break-after: auto;
+    }
+
+    .slides-container {
+        padding: 20px;
+    }
+
+    /* Mantener los estilos de las slides */
+    .slide h2 {
+        color: #667eea;
+        font-size: 1.8em;
+        page-break-after: avoid;
+    }
+
+    .slide h3 {
+        color: #764ba2;
+        font-size: 1.4em;
+        page-break-after: avoid;
+    }
+
+    /* Mantener colores de cajas */
+    .highlight-box {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        page-break-inside: avoid;
+    }
+
+    .info-box {
+        background: #e7f3ff;
+        border-left: 5px solid #2196F3;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        page-break-inside: avoid;
+    }
+
+    .warning-box {
+        background: #fff3cd;
+        border-left: 5px solid #ffc107;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        page-break-inside: avoid;
+    }
+
+    .success-box {
+        background: #d4edda;
+        border-left: 5px solid #28a745;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        page-break-inside: avoid;
+    }
+
+    .tool-item {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        page-break-inside: avoid;
+    }
+
+    .stat-card {
+        border: 2px solid #667eea;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        page-break-inside: avoid;
+    }
+
+    .comparison-table {
+        page-break-inside: avoid;
+    }
+
+    .comparison-table th {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Links visibles en impresión */
+    a[href]:after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #666;
+    }
+
+    .resource-card a[href]:after {
+        content: "";
     }
 }
 
+/* Responsive */
 @media (max-width: 768px) {
     .header h1 {
         font-size: 1.8em;
@@ -351,5 +615,15 @@ button {
     .controls {
         flex-direction: column;
         gap: 15px;
+    }
+
+    .pdf-preview-content {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    .preview-slide {
+        padding: 20px;
     }
 }
