@@ -467,11 +467,11 @@ button {
     border-top: 2px solid #e9ecef;
 }
 
-/* Estilos para impresión - MANTIENE EL DISEÑO ORIGINAL */
+/* Estilos OPTIMIZADOS para impresión - MENOS PÁGINAS */
 @media print {
     @page {
         size: A4;
-        margin: 0;
+        margin: 15mm 10mm;
     }
 
     body {
@@ -496,6 +496,16 @@ button {
 
     .header {
         border-radius: 0;
+        padding: 15px;
+    }
+
+    .header h1 {
+        font-size: 1.5em;
+        margin-bottom: 5px;
+    }
+
+    .header p {
+        font-size: 0.9em;
     }
 
     /* Mostrar todas las slides en impresión */
@@ -511,90 +521,177 @@ button {
     }
 
     .slides-container {
-        padding: 20px;
+        padding: 10px;
     }
 
-    /* Mantener los estilos de las slides */
+    /* REDUCIR tamaños de fuente para optimizar espacio */
     .slide h2 {
         color: #667eea;
-        font-size: 1.8em;
+        font-size: 1.3em;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
         page-break-after: avoid;
     }
 
     .slide h3 {
         color: #764ba2;
-        font-size: 1.4em;
+        font-size: 1.1em;
+        margin-top: 12px;
+        margin-bottom: 8px;
         page-break-after: avoid;
     }
 
-    /* Mantener colores de cajas */
+    .slide h4 {
+        font-size: 1em;
+        margin-top: 10px;
+        margin-bottom: 6px;
+        page-break-after: avoid;
+    }
+
+    .slide p,
+    .slide li {
+        font-size: 0.85em;
+        line-height: 1.4;
+        margin-bottom: 6px;
+    }
+
+    .slide ul,
+    .slide ol {
+        margin-left: 20px;
+        margin-bottom: 10px;
+    }
+
+    /* REDUCIR márgenes de cajas */
+    .highlight-box,
+    .info-box,
+    .warning-box,
+    .success-box {
+        padding: 12px;
+        margin: 10px 0;
+        page-break-inside: avoid;
+    }
+
     .highlight-box {
         background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         color: white;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
-        page-break-inside: avoid;
     }
 
     .info-box {
         background: #e7f3ff;
-        border-left: 5px solid #2196F3;
+        border-left: 4px solid #2196F3;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
-        page-break-inside: avoid;
     }
 
     .warning-box {
         background: #fff3cd;
-        border-left: 5px solid #ffc107;
+        border-left: 4px solid #ffc107;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
-        page-break-inside: avoid;
     }
 
     .success-box {
         background: #d4edda;
-        border-left: 5px solid #28a745;
+        border-left: 4px solid #28a745;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
+    }
+
+    /* OPTIMIZAR tablas */
+    .comparison-table {
+        font-size: 0.75em;
+        margin: 10px 0;
+        page-break-inside: avoid;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+        padding: 8px;
+    }
+
+    .comparison-table th {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        font-size: 0.9em;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* OPTIMIZAR grids */
+    .stats-grid,
+    .resources-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin: 10px 0;
+        page-break-inside: avoid;
+    }
+
+    .stat-card {
+        border: 1px solid #667eea;
+        padding: 10px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .stat-card .number {
+        font-size: 1.5em;
+    }
+
+    .stat-card .label {
+        font-size: 0.85em;
+    }
+
+    .resource-card {
+        padding: 10px;
+        border: 1px solid #e9ecef;
+    }
+
+    .resource-card h4 {
+        font-size: 1em;
+        margin-bottom: 5px;
+    }
+
+    .resource-card p {
+        font-size: 0.8em;
+    }
+
+    /* OPTIMIZAR tool showcase */
+    .tool-showcase {
+        gap: 10px;
+        margin: 10px 0;
         page-break-inside: avoid;
     }
 
     .tool-item {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-        page-break-inside: avoid;
-    }
-
-    .stat-card {
-        border: 2px solid #667eea;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-        page-break-inside: avoid;
-    }
-
-    .comparison-table {
-        page-break-inside: avoid;
-    }
-
-    .comparison-table th {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        padding: 12px;
+        min-width: 200px;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }
 
-    /* Links visibles en impresión */
+    .tool-item h4 {
+        font-size: 1.1em;
+        margin-bottom: 8px;
+    }
+
+    .tool-item p {
+        font-size: 0.85em;
+        margin-bottom: 4px;
+    }
+
+    /* Ocultar URLs largas para ahorrar espacio */
     a[href]:after {
-        content: " (" attr(href) ")";
-        font-size: 0.8em;
-        color: #666;
+        content: "";
     }
 
-    .resource-card a[href]:after {
-        content: "";
+    /* Ajuste final para última slide */
+    .slide:last-child > div:last-child {
+        padding-bottom: 0;
+        margin-bottom: 0;
     }
 }
 
