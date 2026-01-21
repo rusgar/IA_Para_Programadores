@@ -511,3 +511,428 @@
                 
                 <h3>🧪 Por Qué es CRÍTICO Validar Código IA</h3>
                 <div class="warning-box">
+                    <h4>⚠️ Riesgos del Código No Validado:</h4>
+                    <ul>
+                        <li><strong>Errores lógicos sutiles:</strong> El código compila pero no hace lo correcto</li>
+                        <li><strong>Vulnerabilidades de seguridad:</strong> SQL injection, XSS, CSRF no detectados</li>
+                        <li><strong>Problemas de rendimiento:</strong> Algoritmos ineficientes que fallan en producción</li>
+                        <li><strong>Edge cases no manejados:</strong> Falla con inputs inesperados</li>
+                        <li><strong>Dependencias obsoletas:</strong> Usa bibliotecas con vulnerabilidades conocidas</li>
+                    </ul>
+                </div>
+
+                <h3>✅ Checklist de Validación de Código IA</h3>
+                <div class="success-box">
+                    <h4>Antes de Integrar Código Generado por IA:</h4>
+                    <ol>
+                        <li>☑️ <strong>Lectura completa:</strong> Lee y comprende cada línea del código generado</li>
+                        <li>☑️ <strong>Pruebas unitarias:</strong> Crea tests para casos normales y edge cases</li>
+                        <li>☑️ <strong>Análisis estático:</strong> Ejecuta linter y herramientas de análisis (ESLint, Pylint, SonarQube)</li>
+                        <li>☑️ <strong>Revisión de seguridad:</strong> Busca vulnerabilidades comunes (OWASP Top 10)</li>
+                        <li>☑️ <strong>Performance testing:</strong> Valida que cumple requisitos de rendimiento</li>
+                        <li>☑️ <strong>Code review:</strong> Pide a un compañero que revise el código</li>
+                        <li>☑️ <strong>Documentación:</strong> Verifica que esté adecuadamente documentado</li>
+                    </ol>
+                </div>
+
+                <h3>🔬 Estrategias de Testing para Código IA</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Tipo de Test</th>
+                            <th>Propósito</th>
+                            <th>Herramientas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Unitarios</strong></td>
+                            <td>Verificar funciones individuales</td>
+                            <td>Jest, PyTest, JUnit, xUnit</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Integración</strong></td>
+                            <td>Probar interacción entre componentes</td>
+                            <td>Postman, Supertest, TestContainers</td>
+                        </tr>
+                        <tr>
+                            <td><strong>E2E</strong></td>
+                            <td>Simular flujo completo del usuario</td>
+                            <td>Cypress, Selenium, Playwright</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Seguridad</strong></td>
+                            <td>Detectar vulnerabilidades</td>
+                            <td>OWASP ZAP, Snyk, Dependabot</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Performance</strong></td>
+                            <td>Medir tiempo y recursos</td>
+                            <td>JMeter, k6, Lighthouse</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="info-box">
+                    <h4>💡 Prompt para Generar Tests Automáticamente:</h4>
+                    <p>"Genera tests unitarios completos con Jest para la siguiente función, incluyendo casos edge: valores nulos, arrays vacíos, números negativos y entradas inválidas"</p>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📚 Testing Best Practices</h4>
+                        <p>Guía completa de testing con IA</p>
+                        <a href="https://martinfowler.com/articles/practical-test-pyramid.html" target="_blank">Leer →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🛡️ Security Testing</h4>
+                        <p>OWASP guía de testing de seguridad</p>
+                        <a href="https://owasp.org/www-project-web-security-testing-guide/" target="_blank">Ver guía →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Colaboración Humano-IA -->
+            <div class="slide">
+                <h2>4️⃣ Mejores Prácticas de Colaboración Humano-IA</h2>
+                
+                <h3>🤝 El Modelo de Colaboración Efectiva</h3>
+                <p>La programación asistida por IA no es "IA hace todo" ni "humano hace todo". Es una colaboración sinérgica donde cada uno aporta sus fortalezas.</p>
+
+                <div class="tool-showcase">
+                    <div class="tool-item">
+                        <h4>🤖 Fortalezas de la IA</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>✅ Generación rápida de boilerplate</li>
+                            <li>✅ Conocimiento de múltiples lenguajes</li>
+                            <li>✅ Sugerencias de patrones comunes</li>
+                            <li>✅ Autocompletado contextual</li>
+                            <li>✅ Documentación automática</li>
+                        </ul>
+                    </div>
+                    <div class="tool-item">
+                        <h4>👨‍💻 Fortalezas del Humano</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>✅ Comprensión del negocio</li>
+                            <li>✅ Pensamiento crítico</li>
+                            <li>✅ Creatividad arquitectónica</li>
+                            <li>✅ Detección de errores sutiles</li>
+                            <li>✅ Consideraciones éticas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>📋 Los 10 Principios de Colaboración Humano-IA</h3>
+                <div class="highlight-box">
+                    <ol style="margin-bottom: 0;">
+                        <li><strong>Tú eres el arquitecto:</strong> La IA es tu asistente, no tu reemplazo</li>
+                        <li><strong>Especifica el contexto:</strong> Más contexto = mejores sugerencias</li>
+                        <li><strong>Itera y refina:</strong> Usa la IA en múltiples pasadas para mejorar</li>
+                        <li><strong>Valida siempre:</strong> Nunca aceptes código sin entenderlo</li>
+                        <li><strong>Aprende del código generado:</strong> Observa patrones y técnicas nuevas</li>
+                        <li><strong>Combina herramientas:</strong> Usa Copilot para código + ChatGPT para explicaciones</li>
+                        <li><strong>Documenta decisiones:</strong> Explica por qué aceptaste o rechazaste sugerencias</li>
+                        <li><strong>Mantén tu criterio:</strong> No dependas 100% de la IA para decisiones críticas</li>
+                        <li><strong>Feedback continuo:</strong> Indica a la IA qué funciona y qué no</li>
+                        <li><strong>Sigue aprendiendo:</strong> La IA complementa, no reemplaza tu desarrollo profesional</li>
+                    </ol>
+                </div>
+
+                <h3>🎯 Workflow Recomendado: Ciclo de Desarrollo con IA</h3>
+                <div class="info-box">
+                    <h4>Flujo de Trabajo Óptimo:</h4>
+                    <ol>
+                        <li><strong>Diseño (Humano):</strong> Planifica la arquitectura y estructura</li>
+                        <li><strong>Scaffolding (IA):</strong> Genera estructura base y boilerplate</li>
+                        <li><strong>Implementación (Humano + IA):</strong> Desarrolla lógica con asistencia</li>
+                        <li><strong>Refactorización (IA + Humano):</strong> IA sugiere, humano decide</li>
+                        <li><strong>Testing (Humano + IA):</strong> IA genera tests, humano añade casos edge</li>
+                        <li><strong>Revisión (Humano):</strong> Code review completo antes de merge</li>
+                        <li><strong>Documentación (IA + Humano):</strong> IA genera draft, humano refina</li>
+                    </ol>
+                </div>
+
+                <h3>⚖️ Cuándo Usar IA vs. Programación Manual</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Escenario</th>
+                            <th>Usar IA</th>
+                            <th>Programación Manual</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>CRUD básico</strong></td>
+                            <td>✅ Sí - Patrón repetitivo</td>
+                            <td>❌ Pérdida de tiempo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Algoritmo crítico</strong></td>
+                            <td>⚠️ Asistencia inicial</td>
+                            <td>✅ Validación exhaustiva</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Código legacy</strong></td>
+                            <td>✅ Modernización</td>
+                            <td>⚠️ Solo si conoces el dominio</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Seguridad crítica</strong></td>
+                            <td>❌ Riesgo alto</td>
+                            <td>✅ Auditoría manual</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prototipado</strong></td>
+                            <td>✅ Velocidad máxima</td>
+                            <td>❌ Muy lento</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Aprendizaje</strong></td>
+                            <td>✅ Como tutor</td>
+                            <td>✅ Para dominar conceptos</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📖 Artículo: Human-AI Collaboration</h4>
+                        <p>Investigación MIT sobre programación con IA</p>
+                        <a href="https://github.blog/2022-09-07-research-quantifying-github-copilots-impact-on-developer-productivity-and-happiness/" target="_blank">Leer estudio →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🎬 Video: AI Pair Programming</h4>
+                        <p>Técnicas de pair programming con IA</p>
+                        <a href="https://www.youtube.com/watch?v=dhfTaSGYQ4o" target="_blank">Ver video →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Ejercicios Prácticos -->
+            <div class="slide">
+                <h2>🎯 Ejercicios Prácticos del Módulo 2</h2>
+                
+                <h3>Ejercicio 1: Generación Multi-lenguaje (8 horas)</h3>
+                <div class="info-box">
+                    <h4>Objetivo:</h4>
+                    <p>Implementar la misma funcionalidad en 3 lenguajes diferentes usando IA</p>
+                    <h4>Tareas:</h4>
+                    <ol>
+                        <li>Crear un sistema de gestión de tareas (TODO list) con CRUD completo</li>
+                        <li>Implementarlo en: Python (FastAPI), Node.js (Express), y Java (Spring Boot)</li>
+                        <li>Cada implementación debe incluir:
+                            <ul>
+                                <li>Endpoints REST completos (GET, POST, PUT, DELETE)</li>
+                                <li>Validación de datos</li>
+                                <li>Manejo de errores</li>
+                                <li>Persistencia en base de datos (SQLite/MongoDB)</li>
+                            </ul>
+                        </li>
+                        <li>Documentar diferencias entre implementaciones</li>
+                        <li>Comparar tiempo de desarrollo y líneas de código</li>
+                    </ol>
+                    <p><strong>Entrega:</strong> 3 repositorios con código + README comparativo</p>
+                </div>
+
+                <h3>Ejercicio 2: Refactorización Completa (6 horas)</h3>
+                <div class="warning-box">
+                    <h4>Desafío de Legacy Code:</h4>
+                    <p>Se te proporciona código legacy con múltiples problemas (disponible en repositorio del curso)</p>
+                    <h4>Objetivos:</h4>
+                    <ol>
+                        <li>Analizar el código e identificar todos los code smells</li>
+                        <li>Crear un plan de refactorización priorizado</li>
+                        <li>Refactorizar usando asistencia de IA:
+                            <ul>
+                                <li>Eliminar código duplicado</li>
+                                <li>Simplificar condicionales complejos</li>
+                                <li>Aplicar patrones de diseño apropiados</li>
+                                <li>Mejorar nomenclatura y estructura</li>
+                                <li>Optimizar algoritmos ineficientes</li>
+                            </ul>
+                        </li>
+                        <li>Crear suite completa de tests (antes y después)</li>
+                        <li>Medir métricas: complejidad ciclomática, cobertura, performance</li>
+                    </ol>
+                    <p><strong>Entrega:</strong> Repositorio con commits incrementales + informe de mejoras</p>
+                </div>
+
+                <h3>Ejercicio 3: Algoritmos Avanzados (10 horas)</h3>
+                <div class="success-box">
+                    <h4>Reto de Implementación:</h4>
+                    <p>Implementa 5 algoritmos complejos con asistencia de IA</p>
+                    <h4>Algoritmos a Implementar:</h4>
+                    <ol>
+                        <li><strong>Pathfinding:</strong> A* algorithm para navegación en mapa 2D</li>
+                        <li><strong>Sorting:</strong> QuickSort con optimización para arrays parcialmente ordenados</li>
+                        <li><strong>Estructura de Datos:</strong> Red-Black Tree con operaciones balanceadas</li>
+                        <li><strong>String Matching:</strong> Algoritmo Knuth-Morris-Pratt (KMP)</li>
+                        <li><strong>Graph:</strong> Algoritmo de Kruskal para Minimum Spanning Tree</li>
+                    </ol>
+                    <h4>Requisitos:</h4>
+                    <ul>
+                        <li>Implementación correcta con complejidad óptima</li>
+                        <li>Tests exhaustivos con casos edge</li>
+                        <li>Visualización del funcionamiento (opcional pero valorado)</li>
+                        <li>Comparación de rendimiento con implementaciones estándar</li>
+                        <li>Documentación técnica completa</li>
+                    </ul>
+                    <p><strong>Entrega:</strong> Repositorio con cada algoritmo + benchmarks + documentación</p>
+                </div>
+
+                <h3>Ejercicio 4: Colaboración Humano-IA (4 horas)</h3>
+                <div class="highlight-box">
+                    <h4 style="color: white; margin-top: 0;">Proyecto Integrador:</h4>
+                    <p style="color: white;">Desarrolla una aplicación completa aplicando todas las técnicas del módulo</p>
+                    <h4 style="color: white;">Proyecto: Sistema de Autenticación y Autorización</h4>
+                    <ul style="margin-bottom: 0; color: white;">
+                        <li>Registro de usuarios con validación</li>
+                        <li>Login con JWT tokens</li>
+                        <li>Sistema de roles y permisos</li>
+                        <li>Refresh tokens y logout</li>
+                        <li>Rate limiting y protección contra brute force</li>
+                        <li>Tests de seguridad completos</li>
+                    </ul>
+                    <p style="color: white;"><strong>Documenta:</strong> Cada decisión de diseño, qué partes hizo la IA vs. tú, y lecciones aprendidas</p>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📝 Plantilla de Ejercicios</h4>
+                        <p>Formato para documentar tus ejercicios</p>
+                        <a href="#" target="_blank">Descargar →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>💻 Repositorio Base</h4>
+                        <p>Código legacy para ejercicio de refactorización</p>
+                        <a href="#" target="_blank">Clonar repo →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>✅ Rúbrica de Evaluación</h4>
+                        <p>Criterios de evaluación de ejercicios</p>
+                        <a href="#" target="_blank">Ver rúbrica →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: Resumen y Recursos -->
+            <div class="slide">
+                <h2>📚 Resumen y Próximos Pasos</h2>
+                
+                <h3>🎯 Lo que has aprendido en este módulo</h3>
+                <div class="highlight-box">
+                    <ul style="margin-bottom: 0;">
+                        <li>✅ Generación efectiva de código en múltiples lenguajes de programación</li>
+                        <li>✅ Técnicas avanzadas de refactorización asistida por IA</li>
+                        <li>✅ Creación de funciones complejas y algoritmos con ayuda de IA</li>
+                        <li>✅ Validación y testing exhaustivo de código generado por IA</li>
+                        <li>✅ Mejores prácticas de colaboración humano-IA en programación</li>
+                        <li>✅ Workflow profesional de desarrollo con asistencia de IA</li>
+                        <li>✅ Criterios para decidir cuándo usar IA vs. programación manual</li>
+                    </ul>
+                </div>
+
+                <h3>📊 Métricas de Progreso</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="number">80h</div>
+                        <div class="label">Horas Completadas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">8</div>
+                        <div class="label">Lenguajes Practicados</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">15+</div>
+                        <div class="label">Algoritmos Implementados</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">4</div>
+                        <div class="label">Proyectos Completos</div>
+                    </div>
+                </div>
+
+                <h3>📖 Recursos Adicionales Recomendados</h3>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📚 Clean Code</h4>
+                        <p>Libro esencial de Robert C. Martin sobre código limpio</p>
+                        <a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882" target="_blank">Ver libro →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🎓 Curso: Advanced AI Coding</h4>
+                        <p>Deeplearning.AI - Técnicas avanzadas</p>
+                        <a href="https://www.deeplearning.ai/" target="_blank">Acceder →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🌐 Comunidad: Dev with AI</h4>
+                        <p>Foro de desarrolladores usando IA</p>
+                        <a href="https://discord.gg/openai" target="_blank">Unirse →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>📰 Newsletter: AI Coding Weekly</h4>
+                        <p>Actualizaciones semanales sobre IA en programación</p>
+                        <a href="https://www.aiweekly.co/" target="_blank">Suscribirse →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>💻 GitHub: Awesome AI Coding</h4>
+                        <p>Lista curada de recursos de IA para desarrollo</p>
+                        <a href="https://github.com/topics/ai-assisted-coding" target="_blank">Explorar →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🎬 Canal: AI Code Academy</h4>
+                        <p>Tutoriales y casos prácticos en video</p>
+                        <a href="https://www.youtube.com/@github" target="_blank">Suscribirse →</a>
+                    </div>
+                </div>
+
+                <h3>➡️ Próximo Módulo</h3>
+                <div class="info-box">
+                    <h4>Módulo 3: Testing, Debugging y Documentación con IA (70 horas)</h4>
+                    <ul>
+                        <li>Creación automática de pruebas unitarias y de integración</li>
+                        <li>Debugging inteligente con asistencia de IA</li>
+                        <li>Detección de vulnerabilidades y code smells</li>
+                        <li>Generación de documentación técnica profesional</li>
+                        <li>Integración de IA en pipelines de CI/CD</li>
+                        <li>Automatización completa del testing</li>
+                    </ul>
+                    <p><strong>Duración:</strong> 70 horas | <strong>Nivel:</strong> Intermedio-Avanzado</p>
+                </div>
+
+                <div class="success-box">
+                    <h4>✅ Checklist antes de continuar al Módulo 3:</h4>
+                    <ul>
+                        <li>☑️ Has completado los 4 ejercicios prácticos del módulo</li>
+                        <li>☑️ Dominas la generación de código en al menos 3 lenguajes</li>
+                        <li>☑️ Puedes refactorizar código legacy con confianza</li>
+                        <li>☑️ Has implementado algoritmos complejos con asistencia IA</li>
+                        <li>☑️ Comprendes el balance entre IA y criterio humano</li>
+                        <li>☑️ Tienes un workflow definido de colaboración humano-IA</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⏰ Recomendación de Timing:</h4>
+                    <p>Aunque el módulo está diseñado para 80 horas, te recomendamos dedicar tiempo adicional a:</p>
+                    <ul>
+                        <li>Practicar con proyectos personales (10-15 horas extra)</li>
+                        <li>Explorar lenguajes nuevos con ayuda de IA (5-10 horas)</li>
+                        <li>Contribuir a proyectos open source usando IA (10 horas)</li>
+                        <li>Participar en code challenges y hackathons (variable)</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; color: white;">
+                    <h2 style="color: white; border: none; margin: 0;">🎉 ¡Felicidades por completar el Módulo 2!</h2>
+                    <p style="font-size: 1.2em; margin-top: 15px; color: white;">Has dominado la generación y optimización de código con IA. Ahora estás listo para automatizar testing y debugging.</p>
+                    <p style="font-size: 1em; margin-top: 10px; opacity: 0.9;">Total acumulado: <strong>110 horas de formación</strong> (Módulos 1 + 2)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
