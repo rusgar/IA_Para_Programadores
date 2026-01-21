@@ -140,3 +140,6 @@ Este material educativo está bajo Licencia MIT.
 
 Contacto
 Para preguntas o sugerencias sobre el curso, por favor abre un issue en este repositorio.
+
+Nota: Este curso se actualiza regularmente para incluir las últimas herramientas y mejores prácticas en programación con IA.
+
