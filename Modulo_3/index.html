@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 3: Testing, Debugging y Documentación con IA</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Módulo 3: Testing, Debugging y Documentación con IA</h1>
+            <p>Formación Profesional - 70 Horas</p>
+        </div>
+
+        <div class="controls">
+            <div class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
+            </div>
+            <div class="btn-group">
+                <button class="btn-success" onclick="downloadPresentation()">
+                    📥 Descargar PDF
+                </button>
+                <button class="btn-primary" onclick="window.print()">
+                    🖨️ Imprimir
+                </button>
+            </div>
+        </div>
+
+        <div class="slides-container">
+            <!-- Slide 1: Portada -->
+            <div class="slide active">
+                <h2>🎯 Bienvenida al Módulo 3</h2>
+                <div class="highlight-box">
+                    <h3 style="color: white; margin-top: 0;">Objetivos del Módulo</h3>
+                    <ul style="margin-bottom: 0;">
+                        <li>Dominar la creación automática de pruebas unitarias e integración con IA</li>
+                        <li>Aplicar técnicas avanzadas de debugging asistido por IA</li>
+                        <li>Detectar vulnerabilidades y problemas de seguridad con herramientas IA</li>
+                        <li>Generar documentación técnica profesional automáticamente</li>
+                        <li>Integrar IA en pipelines de CI/CD para testing automatizado</li>
+                        <li>Implementar estrategias de Test-Driven Development con asistencia IA</li>
+                    </ul>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="number">70h</div>
+                        <div class="label">Duración Total</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">4</div>
+                        <div class="label">Temas Principales</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">10+</div>
+                        <div class="label">Herramientas Testing</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">20+</div>
+                        <div class="label">Ejercicios Prácticos</div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡 Requisito Previo:</strong> Haber completado los Módulos 1 y 2. Conocimientos básicos de testing (Jest, PyTest, JUnit) son recomendables pero no obligatorios.
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ Herramientas necesarias para este módulo:</h4>
+                    <ul>
+                        <li>IDE con soporte IA (VS Code + GitHub Copilot recomendado)</li>
+                        <li>Framework de testing (Jest, PyTest, JUnit o similar)</li>
+                        <li>Cuenta en GitHub para CI/CD (GitHub Actions)</li>
+                        <li>Herramientas de análisis estático (ESLint, SonarQube, Snyk)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 2: Testing Unitario con IA -->
+            <div class="slide">
+                <h2>1️⃣ Creación de Pruebas Unitarias con IA</h2>
+                
+                <h3>🧪 Fundamentos del Testing Unitario</h3>
+                <p>Las pruebas unitarias validan que las unidades individuales de código (funciones, métodos, clases) funcionan correctamente de forma aislada.</p>
+
+                <div class="info-box">
+                    <h4>Características de un Buen Test Unitario:</h4>
+                    <ul>
+                        <li><strong>Rápido:</strong> Se ejecuta en milisegundos</li>
+                        <li><strong>Independiente:</strong> No depende de otros tests</li>
+                        <li><strong>Repetible:</strong> Produce siempre el mismo resultado</li>
+                        <li><strong>Auto-validante:</strong> Pass o Fail claro</li>
+                        <li><strong>Oportuno:</strong> Escrito antes o justo después del código</li>
+                    </ul>
+                </div>
+
+                <h3>🤖 Generación Automática de Tests con IA</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Framework</th>
+                            <th>Lenguaje</th>
+                            <th>Prompt Efectivo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Jest</strong></td>
+                            <td>JavaScript/TypeScript</td>
+                            <td>"Genera tests Jest completos para esta función incluyendo casos edge, mocks y coverage"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PyTest</strong></td>
+                            <td>Python</td>
+                            <td>"Crea tests PyTest con fixtures, parametrize para múltiples casos y assert detallados"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>JUnit 5</strong></td>
+                            <td>Java</td>
+                            <td>"Genera tests JUnit 5 con @ParameterizedTest, @BeforeEach y assertions completas"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>xUnit</strong></td>
+                            <td>C#/.NET</td>
+                            <td>"Implementa tests xUnit con Theory, InlineData y FluentAssertions"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RSpec</strong></td>
+                            <td>Ruby</td>
+                            <td>"Crea specs RSpec con describe, context, let y ejemplos descriptivos"</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>💡 Estrategias para Generar Tests Completos</h3>
+                <div class="success-box">
+                    <h4>Técnica de 5 Pasos para Tests Exhaustivos:</h4>
+                    <ol>
+                        <li><strong>Happy Path:</strong> "Genera test para el caso de uso normal"</li>
+                        <li><strong>Edge Cases:</strong> "Añade tests para valores límite: 0, null, undefined, arrays vacíos"</li>
+                        <li><strong>Error Handling:</strong> "Crea tests para inputs inválidos y excepciones esperadas"</li>
+                        <li><strong>Boundary Testing:</strong> "Tests para valores mínimos y máximos permitidos"</li>
+                        <li><strong>Integration Points:</strong> "Tests con mocks para dependencias externas"</li>
+                    </ol>
+                </div>
+
+                <div class="tool-showcase">
+                    <div class="tool-item">
+                        <h4>🎯 Ejemplo: Función a Testear</h4>
+                        <p><strong>Prompt:</strong> "Para esta función que calcula descuentos, genera suite completa de tests incluyendo casos edge"</p>
+                    </div>
+                    <div class="tool-item">
+                        <h4>✅ Resultado: 15+ Tests</h4>
+                        <p>La IA genera tests para: valores normales, límites, negativos, null, strings, objetos incompletos, etc.</p>
+                    </div>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📺 Tutorial: AI Test Generation</h4>
+                        <p>Generación automática de tests con Copilot</p>
+                        <a href="https://www.youtube.com/watch?v=ZfT2CXY5-Dc" target="_blank">Ver tutorial →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>📚 Guía: Testing Best Practices</h4>
+                        <p>Mejores prácticas de testing con IA</p>
+                        <a href="https://martinfowler.com/articles/practical-test-pyramid.html" target="_blank">Leer guía →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🛠️ Tool: Jest + Copilot</h4>
+                        <p>Configuración óptima de Jest con IA</p>
+                        <a href="https://jestjs.io/docs/getting-started" target="_blank">Documentación →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Tests de Integración -->
+            <div class="slide">
+                <h2>1️⃣ Pruebas de Integración con IA</h2>
+                
+                <h3>🔗 ¿Qué son las Pruebas de Integración?</h3>
+                <p>Las pruebas de integración verifican que diferentes módulos o servicios funcionan correctamente cuando se combinan. Validan la interacción entre componentes, APIs, bases de datos y servicios externos.</p>
+
+                <h3>🎯 Tipos de Tests de Integración con IA</h3>
+                <div class="tool-showcase">
+                    <div class="tool-item">
+                        <h4>🌐 API Testing</h4>
+                        <p>Tests de endpoints REST/GraphQL</p>
+                        <p><strong>Herramientas:</strong> Supertest, Postman, REST Assured</p>
+                    </div>
+                    <div class="tool-item">
+                        <h4>💾 Database Testing</h4>
+                        <p>Tests de queries y transacciones</p>
+                        <p><strong>Herramientas:</strong> TestContainers, DBUnit</p>
+                    </div>
+                    <div class="tool-item">
+                        <h4>🔌 Service Integration</h4>
+                        <p>Tests de microservicios</p>
+                        <p><strong>Herramientas:</strong> Pact, WireMock, MockServer</p>
+                    </div>
+                </div>
+
+                <h3>📋 Prompts para Generar Tests de Integración</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Tipo de Test</th>
+                            <th>Ejemplo de Prompt</th>
+                            <th>Qué Genera</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>API REST</strong></td>
+                            <td>"Crea tests de integración con Supertest para todos los endpoints de UserController, incluyendo auth"</td>
+                            <td>Suite completa GET/POST/PUT/DELETE con assertions</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Base de Datos</strong></td>
+                            <td>"Genera tests de integración con TestContainers para el repositorio de productos con PostgreSQL"</td>
+                            <td>Setup de BD temporal, tests CRUD, cleanup</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Microservicios</strong></td>
+                            <td>"Implementa contract tests con Pact entre UserService y OrderService"</td>
+                            <td>Consumer y Provider tests con contratos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>External APIs</strong></td>
+                            <td>"Crea tests de integración mockeando llamadas a Stripe API con WireMock"</td>
+                            <td>Mocks de respuestas, tests de error handling</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>🔄 Workflow: TDD con IA (Test-Driven Development)</h3>
+                <div class="highlight-box">
+                    <h4 style="color: white; margin-top: 0;">Ciclo Red-Green-Refactor con IA:</h4>
+                    <ol style="margin-bottom: 0;">
+                        <li><strong>🔴 Red:</strong> "Genera un test que falle para la funcionalidad X" → IA crea test antes del código</li>
+                        <li><strong>🟢 Green:</strong> "Implementa el código mínimo para pasar este test" → IA genera implementación</li>
+                        <li><strong>🔵 Refactor:</strong> "Refactoriza este código manteniendo los tests verdes" → IA mejora sin romper</li>
+                        <li><strong>🔁 Repetir:</strong> Continúa el ciclo para cada nueva funcionalidad</li>
+                    </ol>
+                </div>
+
+                <div class="info-box">
+                    <h4>💡 Ventajas de TDD con IA:</h4>
+                    <ul>
+                        <li>✅ La IA genera tests más completos que humanos típicamente</li>
+                        <li>✅ Acelera el ciclo Red-Green-Refactor significativamente</li>
+                        <li>✅ Identifica casos edge que podrías pasar por alto</li>
+                        <li>✅ Mantiene cobertura de código alta automáticamente</li>
+                        <li>✅ Tests sirven como documentación viva del comportamiento</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ Errores Comunes en Tests de Integración:</h4>
+                    <ul>
+                        <li><strong>Tests lentos:</strong> No usar bases de datos en memoria</li>
+                        <li><strong>Dependencias externas:</strong> No mockear servicios externos</li>
+                        <li><strong>Tests frágiles:</strong> Dependencia en orden de ejecución</li>
+                        <li><strong>Falta de cleanup:</strong> No limpiar datos entre tests</li>
+                        <li><strong>Sobre-mocking:</strong> Mockear demasiado pierde valor de integración</li>
+                    </ul>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📖 Guía: Integration Testing</h4>
+                        <p>Estrategias de testing de integración</p>
+                        <a href="https://martinfowler.com/bliki/IntegrationTest.html" target="_blank">Leer →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🎬 Video: TDD with AI</h4>
+                        <p>Test-Driven Development con Copilot</p>
+                        <a href="https://www.youtube.com/watch?v=gNeHRrW-_Pw" target="_blank">Ver demo →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Debugging con IA -->
+            <div class="slide">
+                <h2>2️⃣ Depuración de Errores con Asistencia IA</h2>
+                
+                <h3>🐛 El Nuevo Paradigma del Debugging</h3>
+                <p>La IA ha revolucionado el debugging tradicional. Ya no necesitas horas buscando en Stack Overflow: la IA analiza tu error, contexto y sugiere soluciones específicas instantáneamente.</p>
+
+                <h3>🔍 Técnicas de Debugging Asistido por IA</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Técnica</th>
+                            <th>Cómo Usar IA</th>
+                            <th>Herramientas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Análisis de Stack Trace</strong></td>
+                            <td>Copia el stack trace completo y pide explicación</td>
+                            <td>ChatGPT, Copilot Chat</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Debugging Contextual</strong></td>
+                            <td>Comparte código + error + contexto para diagnóstico</td>
+                            <td>GitHub Copilot, Tabnine</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Generación de Logs</strong></td>
+                            <td>IA añade logging estratégico para rastrear bug</td>
+                            <td>Copilot + Winston/Log4j</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reproducción de Bugs</strong></td>
+                            <td>IA crea test que reproduce el bug consistentemente</td>
+                            <td>IA + Jest/PyTest</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Root Cause Analysis</strong></td>
+                            <td>IA identifica la causa raíz vs síntomas</td>
+                            <td>ChatGPT-4, Claude</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>💡 Workflow de Debugging con IA</h3>
+                <div class="success-box">
+                    <h4>Proceso de 6 Pasos:</h4>
+                    <ol>
+                        <li><strong>Captura el Error:</strong> Stack trace completo + mensaje de error</li>
+                        <li><strong>Contexto al IA:</strong> "Este error ocurre cuando [descripción]. Código: [paste]. Error: [paste]"</li>
+                        <li><strong>Análisis IA:</strong> IA identifica posibles causas y explica el error</li>
+                        <li><strong>Soluciones Propuestas:</strong> IA sugiere 2-3 soluciones con pros/contras</li>
+                        <li><strong>Implementación:</strong> Aplica la solución más apropiada</li>
+                        <li><strong>Validación:</strong> "Genera test que verifique que este bug no vuelva a ocurrir"</li>
+                    </ol>
+                </div>
+
+                <h3>🎯 Prompts Efectivos para Debugging</h3>
+                <div class="info-box">
+                    <h4>Ejemplos de Prompts Poderosos:</h4>
+                    <ul>
+                        <li><strong>Error Básico:</strong> "Explica este error y cómo solucionarlo: [error]"</li>
+                        <li><strong>Error con Contexto:</strong> "Tengo este error [paste] en este código [paste]. Ocurre cuando el usuario [acción]. ¿Qué puede estar causándolo?"</li>
+                        <li><strong>Performance Bug:</strong> "Esta función es muy lenta con arrays grandes. Analiza y optimiza: [código]"</li>
+                        <li><strong>Memory Leak:</strong> "Sospecho memory leak en este componente React. Identifica el problema: [código]"</li>
+                        <li><strong>Race Condition:</strong> "Tests fallan intermitentemente. Busca race conditions: [código]"</li>
+                    </ul>
+                </div>
+
+                <h3>🛠️ Herramientas IA para Debugging</h3>
+                <div class="tool-showcase">
+                    <div class="tool-item">
+                        <h4>🔧 GitHub Copilot Chat</h4>
+                        <p>Debug directamente en VS Code</p>
+                        <p><strong>Comando:</strong> /explain para entender errores</p>
+                    </div>
+                    <div class="tool-item">
+                        <h4>🤖 ChatGPT/GPT-4</h4>
+                        <p>Análisis profundo de bugs complejos</p>
+                        <p><strong>Ideal para:</strong> Root cause analysis</p>
+                    </div>
+                    <div class="tool-item">
+                        <h4>🔍 Sentry + AI</h4>
+                        <p>Error tracking con sugerencias IA</p>
+                        <p><strong>Feature:</strong> Auto-grouping inteligente</p>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ Limitaciones del Debugging con IA:</h4>
+                    <ul>
+                        <li>No tiene acceso a tu entorno completo (variables runtime, estado)</li>
+                        <li>Puede sugerir soluciones que funcionan pero no son óptimas</li>
+                        <li>Bugs de concurrencia/race conditions son difíciles sin logs</li>
+                        <li>Siempre verifica la solución, no la apliques ciegamente</li>
+                    </ul>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📺 Debugging con Copilot</h4>
+                        <p>Técnicas avanzadas de debugging asistido</p>
+                        <a href="https://www.youtube.com/watch?v=hPVatUSvZq0" target="_blank">Ver demo →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>📖 Debugging Guide</h4>
+                        <p>Guía completa de debugging moderno</p>
+                        <a href="https://code.visualstudio.com/docs/editor/debugging" target="_blank">Leer →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Detección de Vulnerabilidades -->
+            <div class="slide">
+                <h2>2️⃣ Detección de Vulnerabilidades con IA</h2>
+                
+                <h3>🔒 Security Scanning Potenciado por IA</h3>
+                <p>La IA puede identificar vulnerabilidades de seguridad que herramientas tradicionales pasan por alto, analizando patrones complejos y contexto del código.</p>
+
+                <h3>🎯 Tipos de Vulnerabilidades que IA Detecta</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Vulnerabilidad</th>
+                            <th>Descripción</th>
+                            <th>Cómo IA Ayuda</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>SQL Injection</strong></td>
+                            <td>Queries SQL no sanitizadas</td>
+                            <td>Identifica y sugiere parameterized queries</td>
+                        </tr>
+                        <tr>
+                            <td><strong>XSS</strong></td>
+                            <td>Cross-Site Scripting attacks</td>
+                            <td>Detecta output no escapado, sugiere sanitización</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CSRF</strong></td>
+                            <td>Cross-Site Request Forgery</td>
+                            <td>Identifica endpoints sin protección CSRF</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Auth Bypass</strong></td>
+                            <td>Lógica de autenticación débil</td>
+                            <td>Analiza flujos de auth e identifica brechas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Secrets Exposure</strong></td>
+                            <td>Credenciales hardcodeadas</td>
+                            <td>Encuentra API keys, passwords en código</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dependency Issues</strong></td>
+                            <td>Librerías con vulnerabilidades</td>
+                            <td>Escanea y sugiere actualizaciones seguras</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>🛡️ Herramientas de Security Scanning con IA</h3>
+                <div class="tool-showcase">
+                    <div class="tool-item">
+                        <h4>🔍 Snyk</h4>
+                        <p>Escaneo de dependencias con ML</p>
+                        <p><strong>Detecta:</strong> CVEs, licencias, vulnerabilidades</p>
+                    </div>
+                    <div class="tool-item">
+                        <h4>🛡️ GitHub CodeQL</h4>
+                        <p>Análisis semántico de código</p>
+                        <p><strong>Ventaja:</strong> Encuentra bugs complejos</p>
+                    </div>
+                    <div class="tool-item">
+                        <h4>🔐 SonarQube</h4>
+                        <p>Code quality + security</p>
+                        <p><strong>IA:</strong> Priorización inteligente</p>
+                    </div>
+                </div>
+
+                <h3>💡 Prompts para Auditoría de Seguridad</h3>
+                <div class="highlight-box">
+                    <h4 style="color: white; margin-top: 0;">Auditoría de Seguridad con IA:</h4>
+                    <ul style="margin-bottom: 0;">
+                        <li>"Analiza este código buscando vulnerabilidades de OWASP Top 10"</li>
+                        <li>"Revisa esta función de autenticación identificando posibles bypasses"</li>
+                        <li>"Escanea este endpoint buscando SQL injection y XSS"</li>
+                        <li>"Identifica secrets o credenciales hardcodeadas en este repositorio"</li>
+                        <li>"Analiza estas dependencias y sugiere alternativas más seguras"</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h4>🚨 Vulnerabilidades Críticas a Buscar Siempre:</h4>
+                    <ul>
+                        <li><strong>Input Validation:</strong> Toda entrada del usuario debe ser validada</li>
+                        <li><strong>Authentication:</strong> Nunca confíes en datos del cliente</li>
+                        <li><strong>Encryption:</strong> Datos sensibles siempre cifrados (en tránsito y reposo)</li>
+                        <li><strong>Session Management:</strong> Tokens seguros, expiración apropiada</li>
+                        <li><strong>Error Handling:</strong> No exponer información sensible en errores</li>
+                        <li><strong>Access Control:</strong> Verificar permisos en cada operación</li>
+                    </ul>
+                </div>
+
+                <div class="success-box">
+                    <h4>✅ Checklist de Seguridad con IA:</h4>
+                    <ol>
+                        <li>☑️ Escaneo automático de vulnerabilidades en cada commit</li>
+                        <li>☑️ Revisión de dependencias con Snyk/Dependabot</li>
+                        <li>☑️ Análisis estático con SonarQube/CodeQL</li>
+                        <li>☑️ Penetration testing automatizado</li>
+                        <li>☑️ Code review con enfoque en seguridad</li>
+                        <li>☑️ Auditoría de secrets con herramientas especializadas</li>
+                    </ol>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📖 OWASP Top 10</h4>
+                        <p>Vulnerabilidades más críticas en web</p>
+                        <a href="https://owasp.org/www-project-top-ten/" target="_blank">Ver lista →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🛡️ Snyk Docs</h4>
+                        <p>Guía completa de security scanning</p>
+                        <a href="https://snyk.io/learn/" target="_blank">Aprender →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🎓 Security Course</h4>
+                        <p>Curso de seguridad con IA</p>
+                        <a href="https://www.coursera.org/learn/software-security" target="_blank">Tomar curso →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Documentación Técnica -->
+            <div class="slide">
+                <h2>3️⃣ Generación de Documentación Técnica con IA</h2>
+                
+                <h3>📝 La Documentación Ya No es una Carga</h3>
+                <p>La IA puede generar documentación profesional, completa y actualizada en segundos, desde comentarios inline hasta documentación completa de APIs.</p>
+
+                <h3>📚 Tipos de Documentación que IA Genera</h3>
+                <div class="tool-showcase">
+                    <div class="tool-item">
+                        <h4>💬 Comentarios de Código</h4>
+                        <p>JSDoc, Docstrings, XML comments</p>
+                        <p><strong>Prompt:</strong> "Añade comentarios completos a este código"</p>
+                    </div>
+                    <div class="tool-item">
+                        <h4>📖 README Files</h4>
+                        <p>Documentación de proyecto completa</p>
+                        <p><strong>Prompt:</strong> "Crea README profesional para este proyecto"</p>
+                    </div>
+                    <div class="tool-item">
+                        <h4>🌐 API Documentation</h4>
+                        <p>Swagger, OpenAPI, Postman</p>
+                        <p><strong>Prompt:</strong> "Genera OpenAPI spec para esta API"</p>
+                    </div>
+                </div>
+
+                <h3>🎯 Estrategias de Documentación con IA</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Herramienta</th>
+                            <th>Ejemplo de Prompt</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>JSDoc</strong></td>
+                            <td>VS Code + Copilot</td>
+                            <td>"Genera JSDoc completo con @param, @returns, @throws y @example"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Python Docstrings</strong></td>
+                            <td>Copilot + Sphinx</td>
+                            <td>"Añade docstrings estilo Google con Args, Returns, Raises y Examples"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>README</strong></td>
+                            <td>ChatGPT</td>
+                            <td>"Crea README.md profesional con: descripción, instalación, uso, ejemplos, API docs, contribución"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>API Docs</strong></td>
+                            <td>Swagger + IA</td>
+                            <td>"Genera especificación OpenAPI 3.0 para todos estos endpoints con ejemplos"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Architecture Docs</strong></td>
+                            <td>ChatGPT + Mermaid</td>
+                            <td>"Documenta la arquitectura de este sistema con diagramas de componentes, secuencia y despliegue"</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>📋 Template de Documentación Completa</h3>
+                <div class="info-box">
+                    <h4>Prompt para Documentación de Proyecto Completo:</h4>
+                    <p>"Genera documentación completa para este proyecto incluyendo:</p>
+                    <ul>
+                        <li>README.md con badges, descripción, features, instalación, uso, ejemplos</li>
+                        <li>CONTRIBUTING.md con guía de contribución</li>
+                        <li>CHANGELOG.md con historial de versiones</li>
+                        <li>docs/API.md con documentación de endpoints</li>
+                        <li>docs/ARCHITECTURE.md con diagramas del sistema</li>
+                        <li>Comentarios inline en todo el código</li>
+                    </ul>
+                </div>
+
+                <h3>💡 Mejores Prácticas de Documentación</h3>
+                <div class="success-box">
+                    <h4>✅ Documentación de Calidad:</h4>
+                    <ul>
+                        <li><strong>Clara y Concisa:</strong> Explica el "qué" y el "por qué", no solo el "cómo"</li>
+                        <li><strong>Ejemplos Reales:</strong> Incluye code snippets funcionales</li>
+                        <li><strong>Actualizada:</strong> Regenera docs cuando cambies código</li>
+                        <li><strong>Estructurada:</strong> Organización lógica y navegable</li>
+                        <li><strong>Versionada:</strong> Documenta cambios en cada versión</li>
+                        <li><strong>Accesible:</strong> Para desarrolladores de todos los niveles</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box">
+                    <h4 style="color: white; margin-top: 0;">🚀 Workflow: Documentación Automática</h4>
+                    <ol style="margin-bottom: 0;">
+                        <li>Escribes código con Copilot</li>
+                        <li>/** + Enter → Copilot genera JSDoc automáticamente</li>
+                        <li>Al finalizar módulo: "Genera README para este módulo"</li>
+                        <li>Al completar feature: "Actualiza CHANGELOG con esta feature"</li>
+                        <li>Antes de release: "Revisa y actualiza toda la documentación"</li>
+                    </ol>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📖 Docs Best Practices</h4>
+                        <p>Guía de Google sobre documentación técnica</p>
+                        <a href="https://developers.google.com/tech-writing" target="_blank">Leer guía →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🎨 Swagger Editor</h4>
+                        <p>Editor para documentación de APIs</p>
+                        <a href="https://editor.swagger.io/" target="_blank">Probar →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>📚 Read the Docs</h4>
+                        <p>Hosting gratuito de documentación</p>
+                        <a href="https://readthedocs.org/" target="_blank">Explorar →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: CI/CD con IA -->
+            <div class="slide">
+                <h2>4️⃣ Integración de IA en Pipelines CI/CD</h2>
+                
+                <h3>🔄 CI/CD Inteligente con IA</h3>
+                <p>Integrar IA en tus pipelines de CI/CD automatiza testing, code quality checks, security scanning y deployment con inteligencia contextual.</p>
+
+                <h3>🎯 Componentes de un Pipeline CI/CD con IA</h3>
+                <div class="tool-showcase">
+                    <div class="tool-item">
+                        <h4>✅ Continuous Integration</h4>
+                        <p>Build + Test + Analyze automáticos</p>
+                        <p><strong>IA Ayuda:</strong> Generación de tests, análisis de fallos</p>
+                    </div>
+                    <div class="tool-item">
+                        <h4>🚀 Continuous Deployment</h4>
+                        <p>Deploy automatizado a múltiples ambientes</p>
+                        <p><strong>IA Ayuda:</strong> Predicción de fallos, rollback inteligente</p>
+                    </div>
+                    <div class="tool-item">
+                        <h4>📊 Continuous Monitoring</h4>
+                        <p>Observabilidad y alertas inteligentes</p>
+                        <p><strong>IA Ayuda:</strong> Detección de anomalías, RCA automática</p>
+                    </div>
+                </div>
+
+                <h3>🛠️ Herramientas de CI/CD con IA</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Herramienta</th>
+                            <th>Características IA</th>
+                            <th>Ideal Para</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>GitHub Actions</strong></td>
+                            <td>Copilot integrado, sugerencias de workflows</td>
+                            <td>Proyectos en GitHub, integración nativa</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GitLab CI/CD</strong></td>
+                            <td>Auto DevOps, predicción de fallos</td>
+                            <td>Empresas, self-hosted, compliance</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Jenkins + AI</strong></td>
+                            <td>Plugins ML para análisis de builds</td>
+                            <td>Legacy systems, alta personalización</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CircleCI</strong></td>
+                            <td>Test splitting inteligente, insights</td>
+                            <td>Startups, desarrollo ágil</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Azure Pipelines</strong></td>
+                            <td>Azure AI integration, smart scheduling</td>
+                            <td>Ecosistema Microsoft, .NET</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>📋 Ejemplo: GitHub Actions con IA</h3>
+                <div class="info-box">
+                    <h4>Workflow Completo con Testing Automatizado:</h4>
+                    <pre style="background: #f5f5f5; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 0.9em;"><code>name: AI-Powered CI/CD
+
+on: [push, pull_request]
+
+jobs:
+  test-and-analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      # Tests automatizados
+      - name: Run Tests
+        run: npm test
+      
+      # Code quality con SonarQube
+      - name: SonarQube Scan
+        uses: SonarSource/sonarcloud-github-action@master
+      
+      # Security scan con Snyk
+      - name: Snyk Security Scan
+        uses: snyk/actions/node@master
+      
+      # Test coverage con IA
+      - name: Upload Coverage
+        uses: codecov/codecov-action@v3
+      
+      # Deploy si todo pasa
+      - name: Deploy
+        if: github.ref == 'refs/heads/main'
+        run: npm run deploy</code></pre>
+                </div>
+
+                <h3>💡 Prompts para Generar Pipelines</h3>
+                <div class="success-box">
+                    <h4>Generación de CI/CD con IA:</h4>
+                    <ul>
+                        <li>"Crea GitHub Actions workflow para: test, lint, build, deploy a AWS"</li>
+                        <li>"Genera pipeline GitLab CI con stages: test, security scan, deploy staging/production"</li>
+                        <li>"Configura CircleCI para ejecutar tests en paralelo y deploy condicional"</li>
+                        <li>"Implementa pipeline con: unit tests, integration tests, E2E tests, coverage mínimo 80%"</li>
+                    </ul>
+                </div>
+
+                <h3>🚀 Estrategias Avanzadas de CI/CD</h3>
+                <div class="highlight-box">
+                    <h4 style="color: white; margin-top: 0;">Testing Inteligente en Pipeline:</h4>
+                    <ul style="margin-bottom: 0;">
+                        <li><strong>Test Selection:</strong> IA ejecuta solo tests afectados por cambios</li>
+                        <li><strong>Flaky Test Detection:</strong> Identifica tests inestables automáticamente</li>
+                        <li><strong>Test Prioritization:</strong> Ejecuta primero tests más propensos a fallar</li>
+                        <li><strong>Auto-healing:</strong> IA sugiere fixes para tests que fallan</li>
+                        <li><strong>Performance Regression:</strong> Detecta degradación de rendimiento</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ Consideraciones de Seguridad en CI/CD:</h4>
+                    <ul>
+                        <li>Nunca expongas secrets en logs o código</li>
+                        <li>Usa secrets management (GitHub Secrets, Vault)</li>
+                        <li>Limita permisos de tokens de deploy</li>
+                        <li>Audita accesos a pipelines regularmente</li>
+                        <li>Implementa approval gates para producción</li>
+                    </ul>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📖 GitHub Actions Docs</h4>
+                        <p>Documentación oficial completa</p>
+                        <a href="https://docs.github.com/en/actions" target="_blank">Leer docs →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🎬 Video: CI/CD with AI</h4>
+                        <p>Implementación práctica de pipelines</p>
+                        <a href="https://www.youtube.com/watch?v=R8_veQiYBjI" target="_blank">Ver tutorial →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🛠️ CI/CD Templates</h4>
+                        <p>Templates listos para usar</p>
+                        <a href="https://github.com/actions/starter-workflows" target="_blank">Explorar →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Ejercicios Prácticos -->
+            <div class="slide">
+                <h2>🎯 Ejercicios Prácticos del Módulo 3</h2>
+                
+                <h3>Ejercicio 1: Suite Completa de Tests (10 horas)</h3>
+                <div class="info-box">
+                    <h4>Objetivo:</h4>
+                    <p>Crear suite de testing completa con IA para un proyecto real</p>
+                    <h4>Tareas:</h4>
+                    <ol>
+                        <li><strong>Tests Unitarios:</strong> Genera tests para todas las funciones/métodos (coverage 90%+)
+                            <ul>
+                                <li>Happy path + edge cases + error handling</li>
+                                <li>Mocks para dependencias externas</li>
+                                <li>Tests parametrizados para múltiples casos</li>
+                            </ul>
+                        </li>
+                        <li><strong>Tests de Integración:</strong> Implementa tests de APIs/servicios
+                            <ul>
+                                <li>Setup y teardown de bases de datos de test</li>
+                                <li>Tests de endpoints completos</li>
+                                <li>Validación de contratos entre servicios</li>
+                            </ul>
+                        </li>
+                        <li><strong>Tests E2E:</strong> Crea tests end-to-end con Cypress/Playwright
+                            <ul>
+                                <li>Flujos críticos del usuario</li>
+                                <li>Tests cross-browser</li>
+                                <li>Screenshots en fallos</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p><strong>Entrega:</strong> Repositorio con suite completa + reporte de coverage + CI configurado</p>
+                </div>
+
+                <h3>Ejercicio 2: Debugging Challenge (6 horas)</h3>
+                <div class="warning-box">
+                    <h4>Desafío de Bug Hunting:</h4>
+                    <p>Se te proporciona una aplicación con 10 bugs ocultos de diferentes tipos</p>
+                    <h4>Tipos de Bugs a Encontrar:</h4>
+                    <ol>
+                        <li><strong>Logic Errors:</strong> 3 bugs de lógica incorrecta</li>
+                        <li><strong>Security Issues:</strong> 2 vulnerabilidades (SQL injection, XSS)</li>
+                        <li><strong>Performance Problems:</strong> 2 algoritmos ineficientes</li>
+                        <li><strong>Memory Leaks:</strong> 1 memory leak en React/Node</li>
+                        <li><strong>Race Conditions:</strong> 1 condición de carrera</li>
+                        <li><strong>Edge Case Failure:</strong> 1 bug que solo aparece con inputs específicos</li>
+                    </ol>
+                    <h4>Proceso Requerido:</h4>
+                    <ul>
+                        <li>Usa IA para identificar y diagnosticar cada bug</li>
+                        <li>Documenta el proceso de debugging</li>
+                        <li>Implementa la solución</li>
+                        <li>Crea test que reproduzca el bug</li>
+                        <li>Verifica que el test pase después del fix</li>
+                    </ul>
+                    <p><strong>Entrega:</strong> Informe detallado del debugging + código corregido + tests de regresión</p>
+                </div>
+
+                <h3>Ejercicio 3: Security Audit (8 horas)</h3>
+                <div class="success-box">
+                    <h4>Auditoría Completa de Seguridad:</h4>
+                    <p>Realiza una auditoría de seguridad exhaustiva de una aplicación web</p>
+                    <h4>Checklist de Auditoría:</h4>
+                    <ol>
+                        <li><strong>OWASP Top 10:</strong> Verifica todas las vulnerabilidades
+                            <ul>
+                                <li>Injection (SQL, NoSQL, OS command)</li>
+                                <li>Broken Authentication</li>
+                                <li>Sensitive Data Exposure</li>
+                                <li>XML External Entities (XXE)</li>
+                                <li>Broken Access Control</li>
+                                <li>Security Misconfiguration</li>
+                                <li>Cross-Site Scripting (XSS)</li>
+                                <li>Insecure Deserialization</li>
+                                <li>Using Components with Known Vulnerabilities</li>
+                                <li>Insufficient Logging & Monitoring</li>
+                            </ul>
+                        </li>
+                        <li><strong>Dependency Scan:</strong> Analiza todas las dependencias con Snyk</li>
+                        <li><strong>Code Analysis:</strong> Ejecuta SonarQube y corrige issues críticos</li>
+                        <li><strong>Penetration Testing:</strong> Usa OWASP ZAP para tests automáticos</li>
+                        <li><strong>Report:</strong> Genera informe profesional con hallazgos y recomendaciones</li>
+                    </ol>
+                    <p><strong>Entrega:</strong> Informe de auditoría + código corregido + configuración de herramientas de seguridad</p>
+                </div>
+
+                <h3>Ejercicio 4: Documentation Master (4 horas)</h3>
+                <div class="highlight-box">
+                    <h4 style="color: white; margin-top: 0;">Documentación Profesional Completa:</h4>
+                    <p style="color: white;">Genera documentación de nivel empresarial para un proyecto</p>
+                    <h4 style="color: white;">Documentos a Crear:</h4>
+                    <ol style="margin-bottom: 0; color: white;">
+                        <li><strong>README.md:</strong> Completo con badges, quickstart, features, ejemplos</li>
+                        <li><strong>API Documentation:</strong> OpenAPI/Swagger spec completo con ejemplos</li>
+                        <li><strong>Architecture Docs:</strong> Diagramas de componentes, secuencia, despliegue (Mermaid/Draw.io)</li>
+                        <li><strong>Developer Guide:</strong> Setup local, workflows, convenciones</li>
+                        <li><strong>User Guide:</strong> Guía de usuario final con screenshots</li>
+                        <li><strong>CONTRIBUTING.md:</strong> Guía de contribución con código de conducta</li>
+                        <li><strong>CHANGELOG.md:</strong> Historial de versiones semántico</li>
+                        <li><strong>Inline Comments:</strong> JSDoc/Docstrings en todo el código</li>
+                    </ol>
+                    <p style="color: white;"><strong>Entrega:</strong> Repositorio con documentación completa + sitio estático generado (Docusaurus/MkDocs)</p>
+                </div>
+
+                <h3>Ejercicio 5: CI/CD Pipeline (8 horas)</h3>
+                <div class="info-box">
+                    <h4>Implementa Pipeline Completo:</h4>
+                    <p>Configura un pipeline CI/CD profesional con GitHub Actions</p>
+                    <h4>Requisitos del Pipeline:</h4>
+                    <ul>
+                        <li><strong>Build Stage:</strong> Compilación con caching optimizado</li>
+                        <li><strong>Test Stage:</strong> Unit + Integration + E2E en paralelo</li>
+                        <li><strong>Quality Stage:</strong> Linting, code coverage (min 80%), SonarQube</li>
+                        <li><strong>Security Stage:</strong> Snyk scan, OWASP ZAP, secret detection</li>
+                        <li><strong>Deploy Stage:</strong> Deploy automático a staging, manual approval para production</li>
+                        <li><strong>Notifications:</strong> Slack/Discord notifications en fallos</li>
+                        <li><strong>Rollback:</strong> Estrategia automática de rollback en caso de fallo</li>
+                    </ul>
+                    <p><strong>Entrega:</strong> Repositorio con pipeline funcional + documentación del workflow</p>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📝 Plantillas de Ejercicios</h4>
+                        <p>Formatos y rúbricas de evaluación</p>
+                        <a href="#" target="_blank">Descargar →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>💻 Proyecto Base</h4>
+                        <p>Aplicación para ejercicios de testing</p>
+                        <a href="#" target="_blank">Clonar repo →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🐛 Bug Repo</h4>
+                        <p>Aplicación con bugs para debugging challenge</p>
+                        <a href="#" target="_blank">Acceder →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Herramientas y Recursos -->
+            <div class="slide">
+                <h2>🛠️ Ecosistema de Herramientas de Testing con IA</h2>
+                
+                <h3>📦 Herramientas por Categoría</h3>
+                
+                <div class="tool-showcase">
+                    <div class="tool-item">
+                        <h4>🧪 Testing Frameworks</h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
+                            <li>• Jest (JavaScript/React)</li>
+                            <li>• PyTest (Python)</li>
+                            <li>• JUnit 5 (Java)</li>
+                            <li>• xUnit (.NET)</li>
+                            <li>• RSpec (Ruby)</li>
+                            <li>• Go Test (Golang)</li>
+                        </ul>
+                    </div>
+                    <div class="tool-item">
+                        <h4>🔍 Code Analysis</h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
+                            <li>• SonarQube/SonarCloud</li>
+                            <li>• ESLint + Plugins</li>
+                            <li>• Pylint / Black</li>
+                            <li>• RuboCop</li>
+                            <li>• CodeClimate</li>
+                            <li>• Codacy</li>
+                        </ul>
+                    </div>
+                    <div class="tool-item">
+                        <h4>🛡️ Security Tools</h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
+                            <li>• Snyk</li>
+                            <li>• OWASP ZAP</li>
+                            <li>• GitHub CodeQL</li>
+                            <li>• Dependabot</li>
+                            <li>• GitGuardian</li>
+                            <li>• Bandit (Python)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tool-showcase">
+                    <div class="tool-item">
+                        <h4>🚀 CI/CD Platforms</h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
+                            <li>• GitHub Actions</li>
+                            <li>• GitLab CI/CD</li>
+                            <li>• CircleCI</li>
+                            <li>• Jenkins</li>
+                            <li>• Azure Pipelines</li>
+                            <li>• Travis CI</li>
+                        </ul>
+                    </div>
+                    <div class="tool-item">
+                        <h4>📊 Coverage Tools</h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
+                            <li>• Codecov</li>
+                            <li>• Coveralls</li>
+                            <li>• Istanbul (JS)</li>
+                            <li>• Coverage.py</li>
+                            <li>• JaCoCo (Java)</li>
+                            <li>• SimpleCov (Ruby)</li>
+                        </ul>
+                    </div>
+                    <div class="tool-item">
+                        <h4>🌐 E2E Testing</h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
+                            <li>• Cypress</li>
+                            <li>• Playwright</li>
+                            <li>• Selenium</li>
+                            <li>• Puppeteer</li>
+                            <li>• TestCafe</li>
+                            <li>• Nightwatch.js</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>📚 Recursos de Aprendizaje Recomendados</h3>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📖 Test Automation University</h4>
+                        <p>Cursos gratuitos de testing de Applitools</p>
+                        <a href="https://testautomationu.applitools.com/" target="_blank">Acceder →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🎓 Software Testing Course</h4>
+                        <p>Curso completo de Udacity sobre testing</p>
+                        <a href="https://www.udacity.com/course/software-testing--cs258" target="_blank">Ver curso →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>📚 Testing JavaScript</h4>
+                        <p>Curso premium de Kent C. Dodds</p>
+                        <a href="https://testingjavascript.com/" target="_blank">Explorar →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🛡️ OWASP Testing Guide</h4>
+                        <p>Guía definitiva de security testing</p>
+                        <a href="https://owasp.org/www-project-web-security-testing-guide/" target="_blank">Leer →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🎬 YouTube: Testing with AI</h4>
+                        <p>Canal especializado en testing automatizado</p>
+                        <a href="https://www.youtube.com/@Codevolution" target="_blank">Suscribirse →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>💬 Discord: Testing Community</h4>
+                        <p>Comunidad activa de testers</p>
+                        <a href="https://discord.gg/testing" target="_blank">Unirse →</a>
+                    </div>
+                </div>
+
+                <h3>🔗 Links Útiles</h3>
+                <div class="info-box">
+                    <h4>Recursos Esenciales:</h4>
+                    <ul>
+                        <li><strong>Awesome Testing:</strong> <a href="https://github.com/TheJambo/awesome-testing" target="_blank">Lista curada de recursos</a></li>
+                        <li><strong>Test Pyramid:</strong> <a href="https://martinfowler.com/bliki/TestPyramid.html" target="_blank">Concepto fundamental</a></li>
+                        <li><strong>TDD Guide:</strong> <a href="https://www.agilealliance.org/glossary/tdd/" target="_blank">Guía de TDD</a></li>
+                        <li><strong>CI/CD Best Practices:</strong> <a href="https://docs.gitlab.com/ee/ci/pipelines/pipeline_efficiency.html" target="_blank">GitLab Docs</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 10: Resumen -->
+            <div class="slide">
+                <h2>📚 Resumen y Próximos Pasos</h2>
+                
+                <h3>🎯 Lo que has dominado en este módulo</h3>
+                <div class="highlight-box">
+                    <ul style="margin-bottom: 0;">
+                        <li>
