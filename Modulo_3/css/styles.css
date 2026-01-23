@@ -344,17 +344,184 @@ code {
     border-radius: 4px;
 }
 
-/* Estilos de impresión */
+/* Estilos para el modal de vista previa PDF */
+.pdf-preview-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.pdf-preview-modal.closing {
+    animation: modalFadeOut 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalFadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.pdf-preview-content {
+    background: white;
+    width: 95%;
+    height: 95%;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.pdf-preview-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pdf-preview-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+    border: none;
+    color: white;
+}
+
+.close-preview {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: all 0.3s ease;
+}
+
+.close-preview:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.pdf-preview-body {
+    flex: 1;
+    overflow-y: auto;
+    background: #f5f5f5;
+    padding: 20px;
+}
+
+.loading-preview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #667eea;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #e9ecef;
+    border-top: 5px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.preview-slides-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.preview-slide-wrapper {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.preview-slide-number {
+    background: #667eea;
+    color: white;
+    padding: 10px 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.preview-slide {
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pdf-preview-footer {
+    background: #f8f9fa;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    border-top: 2px solid #e9ecef;
+}
+
+/* Estilos OPTIMIZADOS para impresión */
 @media print {
+    @page {
+        size: A4;
+        margin: 15mm 10mm;
+    }
+
     body {
         background: white;
         padding: 0;
+        margin: 0;
     }
 
     .controls,
     .navigation,
-    button {
+    button,
+    .pdf-preview-modal {
         display: none !important;
+    }
+
+    .container {
+        box-shadow: none;
+        border-radius: 0;
+        max-width: 100%;
+    }
+
+    .header {
+        border-radius: 0;
+        padding: 15px;
+    }
+
+    .header h1 {
+        font-size: 1.5em;
+        margin-bottom: 5px;
+    }
+
+    .header p {
+        font-size: 0.9em;
     }
 
     .slide {
@@ -363,22 +530,151 @@ code {
         page-break-inside: avoid;
     }
 
-    .container {
-        box-shadow: none;
-        border-radius: 0;
+    .slide:last-child {
+        page-break-after: auto;
     }
 
-    .header {
+    .slides-container {
+        padding: 10px;
+    }
+
+    .slide h2 {
+        color: #667eea;
+        font-size: 1.3em;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
         page-break-after: avoid;
     }
 
-    .resource-card,
-    .tool-item,
+    .slide h3 {
+        color: #764ba2;
+        font-size: 1.1em;
+        margin-top: 12px;
+        margin-bottom: 8px;
+        page-break-after: avoid;
+    }
+
+    .slide h4 {
+        font-size: 1em;
+        margin-top: 10px;
+        margin-bottom: 6px;
+        page-break-after: avoid;
+    }
+
+    .slide p,
+    .slide li {
+        font-size: 0.85em;
+        line-height: 1.4;
+        margin-bottom: 6px;
+    }
+
+    .slide ul,
+    .slide ol {
+        margin-left: 20px;
+        margin-bottom: 10px;
+    }
+
+    .highlight-box,
     .info-box,
     .warning-box,
-    .success-box,
-    .highlight-box {
+    .success-box {
+        padding: 12px;
+        margin: 10px 0;
         page-break-inside: avoid;
+    }
+
+    .highlight-box {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .info-box {
+        background: #e7f3ff;
+        border-left: 4px solid #2196F3;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .warning-box {
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .success-box {
+        background: #d4edda;
+        border-left: 4px solid #28a745;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .comparison-table {
+        font-size: 0.75em;
+        margin: 10px 0;
+        page-break-inside: avoid;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+        padding: 8px;
+    }
+
+    .comparison-table th {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .stats-grid,
+    .resources-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin: 10px 0;
+        page-break-inside: avoid;
+    }
+
+    .stat-card {
+        border: 1px solid #667eea;
+        padding: 10px;
+    }
+
+    .stat-card .number {
+        font-size: 1.5em;
+    }
+
+    .stat-card .label {
+        font-size: 0.85em;
+    }
+
+    .resource-card {
+        padding: 10px;
+        border: 1px solid #e9ecef;
+    }
+
+    .tool-showcase {
+        gap: 10px;
+        margin: 10px 0;
+        page-break-inside: avoid;
+    }
+
+    .tool-item {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 12px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    pre {
+        font-size: 0.7em;
+        padding: 10px;
+        page-break-inside: avoid;
+    }
+
+    a[href]:after {
+        content: "";
     }
 }
 

@@ -111,6 +111,9 @@ function updateButtons() {
 
 // Navegación con teclado
 document.addEventListener('keydown', function(event) {
+    // No ejecutar si hay un modal abierto
+    if (document.getElementById('pdfPreviewModal')) return;
+    
     switch(event.key) {
         case 'ArrowLeft':
             changeSlide(-1);
@@ -127,7 +130,11 @@ document.addEventListener('keydown', function(event) {
             showSlide(totalSlides - 1);
             break;
         case 'Escape':
-            if (document.fullscreenElement) {
+            // Cerrar modal si está abierto
+            const modal = document.getElementById('pdfPreviewModal');
+            if (modal) {
+                closePdfPreview();
+            } else if (document.fullscreenElement) {
                 document.exitFullscreen();
             }
             break;
@@ -138,64 +145,115 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-// Función para descargar/preparar PDF
+// Función para mostrar vista previa antes de descargar PDF
 function downloadPresentation() {
-    // Crear overlay de carga
-    const overlay = document.createElement('div');
-    overlay.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.8);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        color: white;
-        font-size: 1.5em;
-        flex-direction: column;
-    `;
-    overlay.innerHTML = `
-        <div style="text-align: center;">
-            <div style="font-size: 3em; margin-bottom: 20px;">📄</div>
-            <div>Preparando presentación para PDF...</div>
-            <div style="font-size: 0.8em; margin-top: 10px; opacity: 0.7;">
-                Se abrirá el diálogo de impresión
+    // Crear modal de vista previa
+    const modal = document.createElement('div');
+    modal.id = 'pdfPreviewModal';
+    modal.className = 'pdf-preview-modal';
+    
+    modal.innerHTML = `
+        <div class="pdf-preview-content">
+            <div class="pdf-preview-header">
+                <h2>📄 Vista Previa - Módulo 3: Testing, Debugging y Documentación con IA</h2>
+                <button class="close-preview" onclick="closePdfPreview()">✖️</button>
             </div>
-            <div style="font-size: 0.7em; margin-top: 20px; opacity: 0.6;">
-                💡 Consejo: Selecciona "Guardar como PDF" en destino
+            
+            <div class="pdf-preview-body" id="pdfPreviewBody">
+                <div class="loading-preview">
+                    <div class="spinner"></div>
+                    <p>Generando vista previa...</p>
+                </div>
+            </div>
+            
+            <div class="pdf-preview-footer">
+                <button class="btn-secondary" onclick="closePdfPreview()">
+                    ❌ Cancelar
+                </button>
+                <button class="btn-primary" onclick="printPDF()">
+                    📥 Descargar PDF
+                </button>
             </div>
         </div>
     `;
-    document.body.appendChild(overlay);
-
-    // Preparar para impresión
+    
+    document.body.appendChild(modal);
+    
+    // Generar vista previa después de un momento
     setTimeout(() => {
-        // Mostrar todas las slides para impresión
-        slides.forEach(slide => {
-            slide.classList.add('active');
-        });
+        generatePreview();
+    }, 300);
+}
 
-        // Esperar renderizado
+// Generar vista previa de todas las slides
+function generatePreview() {
+    const previewBody = document.getElementById('pdfPreviewBody');
+    const allSlides = document.querySelectorAll('.slide');
+    
+    let previewHTML = '<div class="preview-slides-container">';
+    
+    allSlides.forEach((slide, index) => {
+        previewHTML += `
+            <div class="preview-slide-wrapper">
+                <div class="preview-slide-number">Diapositiva ${index + 1} de ${totalSlides}</div>
+                <div class="preview-slide">
+                    ${slide.innerHTML}
+                </div>
+            </div>
+        `;
+    });
+    
+    previewHTML += '</div>';
+    previewBody.innerHTML = previewHTML;
+}
+
+// Cerrar vista previa
+function closePdfPreview() {
+    const modal = document.getElementById('pdfPreviewModal');
+    if (modal) {
+        modal.classList.add('closing');
         setTimeout(() => {
-            // Abrir diálogo de impresión
-            window.print();
-
-            // Limpiar después de imprimir
-            setTimeout(() => {
-                document.body.removeChild(overlay);
-                
-                // Restaurar solo slide actual
-                slides.forEach((slide, index) => {
-                    if (index !== currentSlideIndex) {
-                        slide.classList.remove('active');
-                    }
-                });
-            }, 500);
+            modal.remove();
         }, 300);
-    }, 500);
+    }
+}
+
+// Imprimir PDF (función principal)
+function printPDF() {
+    // Añadir clase para imprimir
+    document.body.classList.add('printing-mode');
+    
+    // Mostrar todas las slides
+    const allSlides = document.querySelectorAll('.slide');
+    allSlides.forEach(slide => {
+        slide.classList.add('active');
+    });
+    
+    // Cerrar modal
+    const modal = document.getElementById('pdfPreviewModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+    
+    // Esperar un momento y abrir diálogo de impresión
+    setTimeout(() => {
+        window.print();
+        
+        // Restaurar después de imprimir
+        setTimeout(() => {
+            document.body.classList.remove('printing-mode');
+            
+            // Ocultar todas las slides excepto la actual
+            allSlides.forEach((slide, index) => {
+                if (index !== currentSlideIndex) {
+                    slide.classList.remove('active');
+                }
+            });
+            
+            // Cerrar modal completamente
+            closePdfPreview();
+        }, 500);
+    }, 300);
 }
 
 // Detectar cierre del diálogo de impresión
