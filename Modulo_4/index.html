@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>    
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Módulo 4: Desarrollo de Aplicaciones con APIs de IA</h1>
+            <p>Formación Profesional - 70 Horas</p>
+        </div>
+
+        <div class="controls">
+            <div class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
+            </div>
+            <div class="btn-group">
+                <button class="btn-success" onclick="downloadPresentation()">
+                    📥 Descargar PDF
+                </button>
+                <button class="btn-primary" onclick="window.print()">
+                    🖨️ Imprimir
+                </button>
+            </div>
+        </div>
+
+        <div class="slides-container">
+            <!-- Slide 1: Portada -->
+            <div class="slide active">
+                <h2>🎯 Bienvenida al Módulo 4</h2>
+                <div class="highlight-box">
+                    <h3 style="color: white; margin-top: 0;">Objetivos del Módulo</h3>
+                    <ul style="margin-bottom: 0;">
+                        <li>Dominar las principales APIs de IA: OpenAI, Hugging Face, Google AI</li>
+                        <li>Implementar procesamiento de lenguaje natural (NLP) en aplicaciones</li>
+                        <li>Integrar visión por computador en proyectos de software</li>
+                        <li>Desarrollar sistemas de análisis predictivo con IA</li>
+                        <li>Crear aplicaciones completas: chatbots, análisis de imágenes y predicción de datos</li>
+                        <li>Optimizar costos y rendimiento de APIs de IA en producción</li>
+                    </ul>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="number">70h</div>
+                        <div class="label">Duración Total</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">5</div>
+                        <div class="label">Temas Principales</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">10+</div>
+                        <div class="label">APIs de IA</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">5</div>
+                        <div class="label">Proyectos Prácticos</div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡 Requisitos Previos:</strong> Haber completado los Módulos 1, 2 y 3. Conocimientos de REST APIs, JSON y async/await. Cuenta en OpenAI, Hugging Face o Google Cloud (pueden ser gratuitas).
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ Importante para este módulo:</h4>
+                    <ul>
+                        <li>Necesitarás API keys de al menos uno de los proveedores</li>
+                        <li>Ten en cuenta los costos de las APIs (OpenAI cobra por uso)</li>
+                        <li>Algunas APIs requieren verificación de cuenta/tarjeta de crédito</li>
+                        <li>Implementa rate limiting para evitar costos excesivos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 2: Introducción a APIs de IA -->
+            <div class="slide">
+                <h2>1️⃣ Introducción a las Principales APIs de IA</h2>
+                
+                <h3>🌐 Panorama de APIs de IA en 2025</h3>
+                <p>Las APIs de IA permiten integrar capacidades de inteligencia artificial en tus aplicaciones sin necesidad de entrenar modelos propios. Los principales proveedores ofrecen servicios especializados en diferentes áreas.</p>
+
+                <h3>🎯 Comparativa de Proveedores Principales</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Proveedor</th>
+                            <th>Especialidad</th>
+                            <th>Precio Base</th>
+                            <th>Ideal Para</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>OpenAI</strong></td>
+                            <td>NLP, Chat, Completions, Embeddings</td>
+                            <td>$0.002/1K tokens (GPT-4o-mini)</td>
+                            <td>Chatbots, asistentes, generación de texto</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Anthropic (Claude)</strong></td>
+                            <td>Conversaciones largas, análisis</td>
+                            <td>$3/1M tokens input</td>
+                            <td>Análisis de documentos, código, chat avanzado</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Google AI (Gemini)</strong></td>
+                            <td>Multimodal, Vision, NLP</td>
+                            <td>Gratis (límites), $0.00025/1K chars</td>
+                            <td>Aplicaciones multimodales, análisis de imágenes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hugging Face</strong></td>
+                            <td>Modelos open-source, fine-tuning</td>
+                            <td>Gratis (Inference API), hosted paid</td>
+                            <td>Personalización, modelos específicos, NLP custom</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AWS Bedrock</strong></td>
+                            <td>Múltiples modelos, enterprise</td>
+                            <td>Variable según modelo</td>
+                            <td>Empresas, infraestructura AWS existente</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Azure OpenAI</strong></td>
+                            <td>OpenAI en Azure, compliance</td>
+                            <td>Similar a OpenAI</td>
+                            <td>Empresas Microsoft, cumplimiento normativo</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>🔑 Conceptos Clave de APIs de IA</h3>
+                <div class="info-box">
+                    <h4>Términos Fundamentales:</h4>
+                    <ul>
+                        <li><strong>Tokens:</strong> Unidad de medida del texto (≈4 caracteres o 0.75 palabras)</li>
+                        <li><strong>Context Window:</strong> Cantidad máxima de tokens en una conversación</li>
+                        <li><strong>Temperature:</strong> Control de aleatoriedad (0=determinista, 1=creativo)</li>
+                        <li><strong>Top-p:</strong> Sampling nucleus, alternativa a temperature</li>
+                        <li><strong>Max Tokens:</strong> Límite de tokens en la respuesta</li>
+                        <li><strong>System Prompt:</strong> Instrucciones base del comportamiento del modelo</li>
+                        <li><strong>Few-shot Learning:</strong> Proporcionar ejemplos en el prompt</li>
+                        <li><strong>Embeddings:</strong> Representaciones vectoriales de texto para búsqueda semántica</li>
+                    </ul>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📖 OpenAI Docs</h4>
+                        <p>Documentación oficial completa de la API</p>
+                        <a href="https://platform.openai.com/docs" target="_blank">Explorar →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🤗 Hugging Face Hub</h4>
+                        <p>Miles de modelos pre-entrenados gratuitos</p>
+                        <a href="https://huggingface.co/models" target="_blank">Buscar modelos →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🎓 Google AI Course</h4>
+                        <p>Curso gratuito de Google sobre IA Generativa</p>
+                        <a href="https://developers.google.com/machine-learning/crash-course" target="_blank">Comenzar →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Setup y Primeros Pasos con APIs -->
+            <div class="slide">
+                <h2>1️⃣ Setup y Autenticación de APIs</h2>
+                
+                <h3>🔐 Configuración Inicial por Proveedor</h3>
+                
+                <div class="tool-showcase">
+                    <div class="tool-item">
+                        <h4>🟢 OpenAI API</h4>
+                        <p><strong>1.</strong> Regístrate en platform.openai.com</p>
+                        <p><strong>2.</strong> Crea API Key en API Keys section</p>
+                        <p><strong>3.</strong> Instala SDK: <code>npm install openai</code></p>
+                        <p><strong>4.</strong> Variables de entorno: <code>OPENAI_API_KEY=sk-...</code></p>
+                    </div>
+                    <div class="tool-item">
+                        <h4>🤗 Hugging Face</h4>
+                        <p><strong>1.</strong> Crea cuenta en huggingface.co</p>
+                        <p><strong>2.</strong> Genera token en Settings → Access Tokens</p>
+                        <p><strong>3.</strong> Instala: <code>pip install transformers</code></p>
+                        <p><strong>4.</strong> Usa token: <code>HF_TOKEN=hf_...</code></p>
+                    </div>
+                    <div class="tool-item">
+                        <h4>🔵 Google AI (Gemini)</h4>
+                        <p><strong>1.</strong> Accede a Google AI Studio</p>
+                        <p><strong>2.</strong> Obtén API key gratuita</p>
+                        <p><strong>3.</strong> Instala: <code>npm install @google/generative-ai</code></p>
+                        <p><strong>4.</strong> Variable: <code>GOOGLE_API_KEY=AIza...</code></p>
+                    </div>
+                </div>
+
+                <h3>💻 Ejemplo: Primera Llamada a OpenAI API</h3>
+                <div class="info-box">
+                    <h4>JavaScript/Node.js:</h4>
+                    <pre style="background: #f5f5f5; padding: 15px; border-radius: 8px; overflow-x: auto;"><code>import OpenAI from 'openai';
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
+
+async function chatCompletion() {
+  const completion = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [
+      { role: "system", content: "Eres un asistente útil" },
+      { role: "user", content: "Explica qué son las APIs de IA" }
+    ],
+    temperature: 0.7,
+    max_tokens: 500
+  });
+  
+  console.log(completion.choices[0].message.content);
+}
+
+chatCompletion();</code></pre>
+                </div>
+
+                <div class="warning-box">
+                    <h4>Python:</h4>
+                    <pre style="background: #f5f5f5; padding: 15px; border-radius: 8px; overflow-x: auto;"><code>from openai import OpenAI
+import os
+
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {"role": "system", "content": "Eres un asistente útil"},
+        {"role": "user", "content": "Explica qué son las APIs de IA"}
+    ],
+    temperature=0.7,
+    max_tokens=500
+)
+
+print(response.choices[0].message.content)</code></pre>
+                </div>
+
+                <h3>🛡️ Mejores Prácticas de Seguridad</h3>
+                <div class="success-box">
+                    <h4>✅ Seguridad con API Keys:</h4>
+                    <ul>
+                        <li><strong>NUNCA</strong> hardcodees API keys en el código</li>
+                        <li>Usa variables de entorno (<code>.env</code> files con <code>.gitignore</code>)</li>
+                        <li>Implementa rate limiting para prevenir abuso</li>
+                        <li>Rota keys periódicamente</li>
+                        <li>Usa diferentes keys para dev/staging/production</li>
+                        <li>Implementa proxy backend para ocultar keys del frontend</li>
+                        <li>Monitorea uso y costos regularmente</li>
+                        <li>Configura límites de gasto en los dashboards de proveedores</li>
+                    </ul>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>🔒 Security Guide</h4>
+                        <p>Guía de seguridad para API keys</p>
+                        <a href="https://platform.openai.com/docs/guides/production-best-practices/api-keys" target="_blank">Leer guía →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>📚 Rate Limiting</h4>
+                        <p>Implementación de límites de requests</p>
+                        <a href="https://platform.openai.com/docs/guides/rate-limits" target="_blank">Ver docs →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Procesamiento de Lenguaje Natural -->
+            <div class="slide">
+                <h2>2️⃣ Procesamiento de Lenguaje Natural (NLP)</h2>
+                
+                <h3>🗣️ Aplicaciones de NLP con APIs de IA</h3>
+                <p>El procesamiento de lenguaje natural permite a las aplicaciones entender, interpretar y generar texto humano de forma inteligente.</p>
+
+                <h3>🎯 Casos de Uso Principales de NLP</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aplicación</th>
+                            <th>Descripción</th>
+                            <th>API Recomendada</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Chatbots</strong></td>
+                            <td>Asistentes conversacionales inteligentes</td>
+                            <td>OpenAI GPT-4o, Claude, Gemini</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Resumen de Textos</strong></td>
+                            <td>Condensar documentos largos</td>
+                            <td>Claude (200K context), GPT-4</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Análisis de Sentimiento</strong></td>
+                            <td>Detectar emociones en texto</td>
+                            <td>Hugging Face (DistilBERT), OpenAI</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Traducción</strong></td>
+                            <td>Traducción multilingüe contextual</td>
+                            <td>Google Translate API, GPT-4</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Extracción de Entidades</strong></td>
+                            <td>Identificar nombres, fechas, lugares</td>
+                            <td>Hugging Face (NER models), spaCy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Clasificación de Texto</strong></td>
+                            <td>Categorizar textos automáticamente</td>
+                            <td>Hugging Face (BERT), OpenAI</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Generación de Contenido</strong></td>
+                            <td>Crear artículos, emails, código</td>
+                            <td>GPT-4, Claude, Gemini</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Búsqueda Semántica</strong></td>
+                            <td>Buscar por significado no por keywords</td>
+                            <td>OpenAI Embeddings, Pinecone</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>💡 Ejemplo: Análisis de Sentimiento</h3>
+                <div class="info-box">
+                    <h4>Implementación con OpenAI:</h4>
+                    <pre style="background: #f5f5f5; padding: 15px; border-radius: 8px; overflow-x: auto;"><code>async function analyzeSentiment(text) {
+  const response = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [
+      {
+        role: "system",
+        content: `Analiza el sentimiento del texto y responde SOLO con JSON:
+        {
+          "sentiment": "positive" | "negative" | "neutral",
+          "confidence": 0-1,
+          "emotions": ["joy", "anger", "sadness", etc],
+          "summary": "breve explicación"
+        }`
+      },
+      { role: "user", content: text }
+    ],
+    temperature: 0.3,
+    response_format: { type: "json_object" }
+  });
+  
+  return JSON.parse(response.choices[0].message.content);
+}
+
+// Uso
+const result = await analyzeSentiment(
+  "¡Estoy muy emocionado por este nuevo proyecto! Va a ser increíble."
+);
+console.log(result);
+// { sentiment: "positive", confidence: 0.95, emotions: ["joy", "excitement"], ... }</code></pre>
+                </div>
+
+                <h3>🔍 Búsqueda Semántica con Embeddings</h3>
+                <div class="success-box">
+                    <h4>Concepte: Embeddings</h4>
+                    <p>Los embeddings convierten texto en vectores numéricos que capturan su significado semántico. Textos similares tienen vectores cercanos.</p>
+                    
+                    <h4>Ejemplo de Uso:</h4>
+                    <pre style="background: #f5f5f5; padding: 15px; border-radius: 8px; overflow-x: auto;"><code>// 1. Generar embeddings para documentos
+async function createEmbedding(text) {
+  const response = await openai.embeddings.create({
+    model: "text-embedding-3-small",
+    input: text
+  });
+  return response.data[0].embedding; // Array de 1536 números
+}
+
+// 2. Buscar documentos similares (usando similitud coseno)
+function cosineSimilarity(vecA, vecB) {
+  const dotProduct = vecA.reduce((sum, a, i) => sum + a * vecB[i], 0);
+  const magA = Math.sqrt(vecA.reduce((sum, a) => sum + a * a, 0));
+  const magB = Math.sqrt(vecB.reduce((sum, b) => sum + b * b, 0));
+  return dotProduct / (magA * magB);
+}
+
+// 3. Buscar
+const query = "cómo cocinar pasta";
+const queryEmbedding = await createEmbedding(query);
+const results = documents.map(doc => ({
+  doc,
+  similarity: cosineSimilarity(queryEmbedding, doc.embedding)
+})).sort((a, b) => b.similarity - a.similarity);</code></pre>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📖 NLP Guide</h4>
+                        <p>Guía completa de NLP con OpenAI</p>
+                        <a href="https://platform.openai.com/docs/guides/text-generation" target="_blank">Leer →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🤗 NLP Models</h4>
+                        <p>Modelos especializados en Hugging Face</p>
+                        <a href="https://huggingface.co/models?pipeline_tag=text-classification" target="_blank">Explorar →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🎓 Embeddings Tutorial</h4>
+                        <p>Tutorial profundo de embeddings</p>
+                        <a href="https://platform.openai.com/docs/guides/embeddings" target="_blank">Aprender →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Visión por Computador -->
+            <div class="slide">
+                <h2>3️⃣ Visión por Computador con APIs de IA</h2>
+                
+                <h3>👁️ Capacidades de Computer Vision</h3>
+                <p>Las APIs de visión por computador permiten analizar, interpretar y generar imágenes utilizando inteligencia artificial.</p>
+
+                <h3>🎯 Aplicaciones de Visión IA</h3>
+                <div class="tool-showcase">
+                    <div class="tool-item">
+                        <h4>🖼️ Análisis de Imágenes</h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
+                            <li>• Detección de objetos</li>
+                            <li>• Reconocimiento facial</li>
+                            <li>• OCR (texto en imágenes)</li>
+                            <li>• Clasificación de imágenes</li>
+                            <li>• Descripción automática</li>
+                        </ul>
+                    </div>
+                    <div class="tool-item">
+                        <h4>🎨 Generación de Imágenes</h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
+                            <li>• Text-to-Image (DALL-E 3)</li>
+                            <li>• Edición de imágenes</li>
+                            <li>• Variaciones de imagen</li>
+                            <li>• Inpainting/Outpainting</li>
+                            <li>• Upscaling con IA</li>
+                        </ul>
+                    </div>
+                    <div class="tool-item">
+                        <h4>📹 Procesamiento de Video</h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
+                            <li>• Resumen de videos</li>
+                            <li>• Transcripción automática</li>
+                            <li>• Detección de acciones</li>
+                            <li>• Generación de thumbnails</li>
+                            <li>• Análisis de contenido</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>💻 Ejemplo: Análisis de Imagen con GPT-4 Vision</h3>
+                <div class="info-box">
+                    <h4>Analizar contenido de imágenes:</h4>
+                    <pre style="background: #f5f5f5; padding: 15px; border-radius: 8px; overflow-x: auto;"><code>async function analyzeImage(imageUrl) {
+  const response = await openai.chat.completions.create({
+    model: "gpt-4o",
+    messages: [
+      {
+        role: "user",
+        content: [
+          {
+            type: "text",
+            text: `Analiza esta imagen y proporciona:
+            1. Descripción detallada
+            2. Objetos detectados
+            3. Texto visible (si hay)
+            4. Emociones o mood
+            5. Sugerencias de uso`
+          },
+          {
+            type: "image_url",
+            image_url: { url: imageUrl }
+          }
+        ]
+      }
+    ],
+    max_tokens: 1000
+  });
+  
+  return response.choices[0].message.content;
+}
+
+// Uso
+const analysis = await analyzeImage(
+  "https://ejemplo.com/imagen.jpg"
+);
+console.log(analysis);</code></pre>
+                </div>
+
+                <h3>🎨 Generación de Imágenes con DALL-E 3</h3>
+                <div class="warning-box">
+                    <h4>Crear imágenes desde texto:</h4>
+                    <pre style="background: #f5f5f5; padding: 15px; border-radius: 8px; overflow-x: auto;"><code>async function generateImage(prompt) {
+  const response = await openai.images.generate({
+    model: "dall-e-3",
+    prompt: prompt,
+    n: 1,
+    size: "1024x1024", // "1024x1024", "1792x1024", "1024x1792"
+    quality: "standard", // "standard" o "hd"
+    style: "vivid" // "vivid" o "natural"
+  });
+  
+  return {
+    url: response.data[0].url,
+    revisedPrompt: response.data[0].revised_prompt
+  };
+}
+
+// Uso
+const image = await generateImage(
+  "Un gato programador trabajando en un MacBook, estilo cyberpunk, iluminación neón"
+);
+console.log(`Imagen generada: ${image.url}`);</code></pre>
+                </div>
+
+                <h3>📊 APIs de Visión Especializadas</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>API</th>
+                            <th>Especialidad</th>
+                            <th>Casos de Uso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Google Cloud Vision</strong></td>
+                            <td>OCR, detección de objetos, faces</td>
+                            <td>Escaneo de documentos, moderación de contenido</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AWS Rekognition</strong></td>
+                            <td>Análisis facial, video analysis</td>
+                            <td>Seguridad, búsqueda de personas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Azure Computer Vision</strong></td>
+                            <td>OCR, spatial analysis</td>
+                            <td>Retail, manufactura, accesibilidad</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Roboflow</strong></td>
+                            <td>Custom object detection</td>
+                            <td>Detección personalizada, modelos custom</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📖 Vision API Docs</h4>
+                        <p>Documentación de GPT-4 Vision</p>
+                        <a href="https://platform.openai.com/docs/guides/vision" target="_blank">Leer docs →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🎨 DALL-E Guide</h4>
+                        <p>Guía completa de generación de imágenes</p>
+                        <a href="https://platform.openai.com/docs/guides/images" target="_blank">Ver guía →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🤗 Vision Models</h4>
+                        <p>Modelos de visión en Hugging Face</p>
+                        <a href="https://huggingface.co/models?pipeline_tag=image-classification" target="_blank">Explorar →</a>
+                    </div>
+                </div>
+            </div>
+ 
+ <script src="js/script.js"></script>   
+</body>
+</html>
