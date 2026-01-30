@@ -575,6 +575,762 @@ console.log(`Imagen generada: ${image.url}`);</code></pre>
                     </div>
                 </div>
             </div>
+                        <!-- Slide 6: Casos Prácticos - Chatbot -->
+            <div class="slide">
+                <h2>5️⃣ Caso Práctico 1: Chatbot con IA</h2>
+                
+                <h3>🤖 Construcción de un Chatbot Inteligente</h3>
+                <p>Un chatbot con IA puede mantener conversaciones naturales, recordar contexto y proporcionar respuestas personalizadas basándose en el historial de la conversación.</p>
+
+                <h3>🏗️ Arquitectura de un Chatbot Moderno</h3>
+                <div class="tool-showcase">
+                    <div class="tool-item">
+                        <h4>1️⃣ Frontend</h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
+                            <li>• Interfaz de chat (React, Vue)</li>
+                            <li>• Websockets para real-time</li>
+                            <li>• Markdown rendering</li>
+                            <li>• Typing indicators</li>
+                        </ul>
+                    </div>
+                    <div class="tool-item">
+                        <h4>2️⃣ Backend API</h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
+                            <li>• Node.js/Python/FastAPI</li>
+                            <li>• Gestión de sesiones</li>
+                            <li>• Rate limiting</li>
+                            <li>• Caché de respuestas</li>
+                        </ul>
+                    </div>
+                    <div class="tool-item">
+                        <h4>3️⃣ IA Integration</h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
+                            <li>• OpenAI/Claude API</li>
+                            <li>• Context management</li>
+                            <li>• Prompt engineering</li>
+                            <li>• Streaming responses</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>💡 Implementación Completa de Chatbot</h3>
+                <div class="info-box">
+                    <h4>Backend - Node.js con Express:</h4>
+                    <pre style="background: #f5f5f5; padding: 15px; border-radius: 8px; overflow-x: auto;"><code>import express from 'express';
+import OpenAI from 'openai';
+
+const app = express();
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+// Almacenar conversaciones (en producción: usar Redis/DB)
+const conversations = new Map();
+
+app.post('/api/chat', async (req, res) => {
+  const { message, sessionId } = req.body;
+  
+  // Obtener o crear historial de conversación
+  if (!conversations.has(sessionId)) {
+    conversations.set(sessionId, [
+      {
+        role: "system",
+        content: "Eres un asistente útil y amigable. Responde de forma clara y concisa."
+      }
+    ]);
+  }
+  
+  const history = conversations.get(sessionId);
+  history.push({ role: "user", content: message });
+  
+  try {
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: history,
+      temperature: 0.7,
+      max_tokens: 500,
+      stream: true // Streaming para respuestas en tiempo real
+    });
+    
+    // Configurar SSE para streaming
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+    
+    let fullResponse = '';
+    
+    for await (const chunk of completion) {
+      const content = chunk.choices[0]?.delta?.content || '';
+      fullResponse += content;
+      res.write(`data: ${JSON.stringify({ content })}\n\n`);
+    }
+    
+    // Guardar respuesta completa en historial
+    history.push({ role: "assistant", content: fullResponse });
+    res.write('data: [DONE]\n\n');
+    res.end();
+    
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.listen(3000, () => console.log('Chatbot API running on port 3000'));</code></pre>
+                </div>
+
+                <h3>⚙️ Características Avanzadas</h3>
+                <div class="success-box">
+                    <h4>✅ Mejoras para Producción:</h4>
+                    <ul>
+                        <li><strong>Context Window Management:</strong> Limitar historial para no exceder tokens</li>
+                        <li><strong>Memory/Summarization:</strong> Resumir conversaciones largas</li>
+                        <li><strong>Function Calling:</strong> Integrar con APIs externas (clima, calendario, DB)</li>
+                        <li><strong>Sentiment Analysis:</strong> Detectar frustración y escalar a humano</li>
+                        <li><strong>Multi-tenancy:</strong> Aislar conversaciones por usuario/empresa</li>
+                        <li><strong>Analytics:</strong> Tracking de métricas (tiempo respuesta, satisfacción)</li>
+                    </ul>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📖 Chatbot Tutorial</h4>
+                        <p>Tutorial completo de OpenAI sobre chatbots</p>
+                        <a href="https://platform.openai.com/docs/guides/chat-completions" target="_blank">Ver tutorial →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>💻 Demo Code</h4>
+                        <p>Repositorio con chatbot completo</p>
+                        <a href="https://github.com/openai/openai-cookbook" target="_blank">Ver código →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Casos Prácticos - Análisis de Imágenes -->
+            <div class="slide">
+                <h2>5️⃣ Caso Práctico 2: Análisis de Imágenes y Texto</h2>
+                
+                <h3>🖼️ Aplicación de Análisis Multimodal</h3>
+                <p>Combina visión por computador con NLP para analizar imágenes que contienen texto, crear descripciones automáticas y extraer información estructurada.</p>
+
+                <h3>🎯 Proyecto: Analizador de Facturas/Recibos</h3>
+                <div class="highlight-box">
+                    <h4 style="color: white; margin-top: 0;">Funcionalidades del Sistema:</h4>
+                    <ol style="margin-bottom: 0;">
+                        <li>Usuario sube foto de factura/recibo</li>
+                        <li>IA extrae: fecha, monto total, items, comercio</li>
+                        <li>Clasifica gastos por categoría</li>
+                        <li>Genera resumen y estadísticas</li>
+                        <li>Exporta a formato estructurado (JSON/CSV)</li>
+                    </ol>
+                </div>
+
+                <h3>💻 Implementación con GPT-4 Vision</h3>
+                <div class="info-box">
+                    <h4>Análisis de Factura:</h4>
+                    <pre style="background: #f5f5f5; padding: 15px; border-radius: 8px; overflow-x: auto;"><code>async function analyzeReceipt(imageBase64) {
+  const response = await openai.chat.completions.create({
+    model: "gpt-4o",
+    messages: [
+      {
+        role: "user",
+        content: [
+          {
+            type: "text",
+            text: `Analiza esta factura y extrae la información en formato JSON:
+            {
+              "merchant": "nombre del comercio",
+              "date": "YYYY-MM-DD",
+              "total": número,
+              "currency": "EUR/USD/etc",
+              "items": [
+                { "name": "producto", "quantity": 1, "price": 10.50 }
+              ],
+              "category": "comida/transporte/etc",
+              "tax": número,
+              "paymentMethod": "efectivo/tarjeta"
+            }`
+          },
+          {
+            type: "image_url",
+            image_url: {
+              url: `data:image/jpeg;base64,${imageBase64}`
+            }
+          }
+        ]
+      }
+    ],
+    max_tokens: 1000,
+    response_format: { type: "json_object" }
+  });
+  
+  return JSON.parse(response.choices[0].message.content);
+}
+
+// Ejemplo de uso
+const receiptData = await analyzeReceipt(base64Image);
+console.log(receiptData);
+/*
+{
+  merchant: "Supermercado ABC",
+  date: "2025-01-30",
+  total: 45.67,
+  currency: "EUR",
+  items: [
+    { name: "Pan", quantity: 2, price: 1.50 },
+    { name: "Leche", quantity: 1, price: 1.20 }
+  ],
+  category: "comida",
+  tax: 4.15,
+  paymentMethod: "tarjeta"
+}
+*/</code></pre>
+                </div>
+
+                <h3>📊 Frontend con Upload y Visualización</h3>
+                <div class="warning-box">
+                    <h4>React Component para Upload de Imágenes:</h4>
+                    <pre style="background: #f5f5f5; padding: 15px; border-radius: 8px; overflow-x: auto;"><code>import { useState } from 'react';
+
+function ReceiptAnalyzer() {
+  const [image, setImage] = useState(null);
+  const [analysis, setAnalysis] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    
+    reader.onload = async (event) => {
+      const base64 = event.target.result.split(',')[1];
+      setImage(event.target.result);
+      setLoading(true);
+      
+      try {
+        const response = await fetch('/api/analyze-receipt', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ image: base64 })
+        });
+        
+        const data = await response.json();
+        setAnalysis(data);
+      } catch (error) {
+        console.error('Error:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    reader.readAsDataURL(file);
+  };
+
+  return (
+    <div>
+      <input type="file" accept="image/*" onChange={handleImageUpload} />
+      
+      {image && <img src={image} alt="Receipt" style={{maxWidth: '400px'}} />}
+      
+      {loading && <p>Analizando factura...</p>}
+      
+      {analysis && (
+        <div>
+          <h3>Resultados del Análisis</h3>
+          <p><strong>Comercio:</strong> {analysis.merchant}</p>
+          <p><strong>Fecha:</strong> {analysis.date}</p>
+          <p><strong>Total:</strong> {analysis.total} {analysis.currency}</p>
+          <p><strong>Categoría:</strong> {analysis.category}</p>
+          
+          <h4>Items:</h4>
+          <ul>
+            {analysis.items.map((item, i) => (
+              <li key={i}>
+                {item.name} x{item.quantity} - {item.price}€
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}</code></pre>
+                </div>
+
+                <div class="success-box">
+                    <h4>🎯 Casos de Uso Adicionales:</h4>
+                    <ul>
+                        <li><strong>Moderación de contenido:</strong> Detectar imágenes inapropiadas en redes sociales</li>
+                        <li><strong>Accesibilidad:</strong> Generar descripciones de imágenes para lectores de pantalla</li>
+                        <li><strong>E-commerce:</strong> Búsqueda visual de productos similares</li>
+                        <li><strong>Documentación:</strong> Extraer información de documentos escaneados</li>
+                        <li><strong>Control de calidad:</strong> Detectar defectos en productos manufacturados</li>
+                    </ul>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📖 Vision API Guide</h4>
+                        <p>Guía completa de GPT-4 Vision</p>
+                        <a href="https://platform.openai.com/docs/guides/vision" target="_blank">Leer guía →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🎨 OCR Examples</h4>
+                        <p>Ejemplos de extracción de texto</p>
+                        <a href="https://platform.openai.com/docs/guides/vision/quickstart" target="_blank">Ver ejemplos →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Casos Prácticos - Predicción de Datos -->
+            <div class="slide">
+                <h2>5️⃣ Caso Práctico 3: Predicción de Datos con IA</h2>
+                
+                <h3>📈 Sistema de Predicción y Análisis</h3>
+                <p>Utiliza APIs de IA combinadas con técnicas de análisis de datos para crear sistemas predictivos que ayuden en la toma de decisiones.</p>
+
+                <h3>🎯 Proyecto: Predictor de Churn de Clientes</h3>
+                <div class="tool-showcase">
+                    <div class="tool-item">
+                        <h4>📊 Entrada de Datos</h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
+                            <li>• Datos históricos de clientes</li>
+                            <li>• Patrones de uso</li>
+                            <li>• Interacciones de soporte</li>
+                            <li>• Feedback y reviews</li>
+                        </ul>
+                    </div>
+                    <div class="tool-item">
+                        <h4>🤖 Procesamiento IA</h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
+                            <li>• Embeddings para similitud</li>
+                            <li>• Análisis de sentimiento</li>
+                            <li>• Clasificación con GPT-4</li>
+                            <li>• Detección de patrones</li>
+                        </ul>
+                    </div>
+                    <div class="tool-item">
+                        <h4>📉 Salida Predictiva</h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9em;">
+                            <li>• Probabilidad de churn</li>
+                            <li>• Factores de riesgo</li>
+                            <li>• Recomendaciones de retención</li>
+                            <li>• Alertas automáticas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>💻 Implementación del Sistema Predictivo</h3>
+                <div class="info-box">
+                    <h4>Análisis Predictivo con OpenAI:</h4>
+                    <pre style="background: #f5f5f5; padding: 15px; border-radius: 8px; overflow-x: auto;"><code>async function predictChurn(customerData) {
+  const prompt = `Analiza los siguientes datos de cliente y predice el riesgo de churn:
+
+Datos del cliente:
+- Tiempo como cliente: ${customerData.tenure} meses
+- Tickets de soporte últimos 3 meses: ${customerData.supportTickets}
+- Última interacción: ${customerData.lastInteraction} días atrás
+- NPS Score: ${customerData.npsScore}/10
+- Uso del producto: ${customerData.usage}%
+- Comentarios recientes: "${customerData.recentFeedback}"
+
+Proporciona tu análisis en formato JSON:
+{
+  "churnRisk": "low" | "medium" | "high",
+  "probability": 0-100,
+  "riskFactors": ["factor1", "factor2"],
+  "recommendations": ["acción1", "acción2"],
+  "urgency": "immediate" | "soon" | "monitor",
+  "reasoning": "explicación breve"
+}`;
+
+  const response = await openai.chat.completions.create({
+    model: "gpt-4o",
+    messages: [
+      {
+        role: "system",
+        content: "Eres un experto en análisis predictivo y retención de clientes."
+      },
+      { role: "user", content: prompt }
+    ],
+    temperature: 0.3, // Más determinista para predicciones
+    response_format: { type: "json_object" }
+  });
+  
+  return JSON.parse(response.choices[0].message.content);
+}
+
+// Ejemplo de uso
+const prediction = await predictChurn({
+  tenure: 3,
+  supportTickets: 8,
+  lastInteraction: 15,
+  npsScore: 4,
+  usage: 25,
+  recentFeedback: "La aplicación es muy lenta últimamente"
+});
+
+console.log(prediction);
+/*
+{
+  churnRisk: "high",
+  probability: 78,
+  riskFactors: [
+    "Alto número de tickets de soporte",
+    "Bajo NPS score",
+    "Disminución en uso del producto",
+    "Feedback negativo sobre rendimiento"
+  ],
+  recommendations: [
+    "Contacto inmediato del Customer Success",
+    "Investigar problemas de rendimiento",
+    "Ofrecer sesión de onboarding personalizada",
+    "Descuento o upgrade temporal"
+  ],
+  urgency: "immediate",
+  reasoning: "Cliente nuevo con señales claras de insatisfacción y bajo engagement"
+}
+*/</code></pre>
+                </div>
+
+                <h3>📊 Dashboard de Predicciones</h3>
+                <div class="success-box">
+                    <h4>✅ Componentes del Sistema:</h4>
+                    <ul>
+                        <li><strong>Data Pipeline:</strong> Actualización automática de datos de clientes</li>
+                        <li><strong>Scoring Engine:</strong> Evaluación periódica de todos los clientes</li>
+                        <li><strong>Alert System:</strong> Notificaciones automáticas para alto riesgo</li>
+                        <li><strong>Dashboard:</strong> Visualización de métricas y tendencias</li>
+                        <li><strong>Action Tracking:</strong> Seguimiento de acciones de retención</li>
+                        <li><strong>A/B Testing:</strong> Validación de estrategias de retención</li>
+                    </ul>
+                </div>
+
+                <h3>⚡ Optimizaciones para Producción</h3>
+                <div class="warning-box">
+                    <h4>⚠️ Consideraciones Importantes:</h4>
+                    <ul>
+                        <li><strong>Batch Processing:</strong> Analizar múltiples clientes en lotes</li>
+                        <li><strong>Caching:</strong> Cache de predicciones recientes (24-48h)</li>
+                        <li><strong>Cost Control:</strong> Límites de API calls y fallback a modelos locales</li>
+                        <li><strong>Monitoring:</strong> Track accuracy de predicciones vs resultados reales</li>
+                        <li><strong>Feedback Loop:</strong> Mejorar prompts basándose en resultados</li>
+                    </ul>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📖 Predictive AI Guide</h4>
+                        <p>Guía de análisis predictivo con IA</p>
+                        <a href="https://platform.openai.com/docs/guides/function-calling" target="_blank">Leer guía →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>📊 Data Analysis</h4>
+                        <p>Técnicas de análisis de datos con LLMs</p>
+                        <a href="https://github.com/openai/openai-cookbook" target="_blank">Ver ejemplos →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Optimización y Mejores Prácticas -->
+            <div class="slide">
+                <h2>6️⃣ Optimización de Costos y Rendimiento</h2>
+                
+                <h3>💰 Gestión de Costos en APIs de IA</h3>
+                <p>Las APIs de IA pueden ser costosas en producción. Es crucial implementar estrategias de optimización y control de gastos.</p>
+
+                <h3>📊 Estrategias de Reducción de Costos</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Estrategia</th>
+                            <th>Ahorro Estimado</th>
+                            <th>Implementación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Usar modelos más pequeños</strong></td>
+                            <td>50-90%</td>
+                            <td>GPT-4o-mini en lugar de GPT-4 para tareas simples</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Caching de respuestas</strong></td>
+                            <td>30-70%</td>
+                            <td>Redis/Memcached para queries frecuentes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prompt optimization</strong></td>
+                            <td>20-40%</td>
+                            <td>Prompts más concisos y específicos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Batch processing</strong></td>
+                            <td>15-30%</td>
+                            <td>Agrupar múltiples requests en uno</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Streaming responses</strong></td>
+                            <td>Variable</td>
+                            <td>Mejor UX, no ahorra pero mejora percepción</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rate limiting</strong></td>
+                            <td>Previene abusos</td>
+                            <td>Límites por usuario/IP</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>⚡ Implementación de Caché Inteligente</h3>
+                <div class="info-box">
+                    <h4>Sistema de Caché con Redis:</h4>
+                    <pre style="background: #f5f5f5; padding: 15px; border-radius: 8px; overflow-x: auto;"><code>import Redis from 'ioredis';
+import crypto from 'crypto';
+
+const redis = new Redis();
+
+async function cachedAIRequest(prompt, options = {}) {
+  // Generar hash único del prompt
+  const cacheKey = crypto
+    .createHash('md5')
+    .update(JSON.stringify({ prompt, options }))
+    .digest('hex');
+  
+  // Intentar obtener de caché
+  const cached = await redis.get(`ai:${cacheKey}`);
+  if (cached) {
+    console.log('✅ Cache HIT - Ahorrando llamada a API');
+    return JSON.parse(cached);
+  }
+  
+  console.log('❌ Cache MISS - Llamando a API');
+  
+  // Llamar a API
+  const response = await openai.chat.completions.create({
+    model: options.model || "gpt-4o-mini",
+    messages: [{ role: "user", content: prompt }],
+    ...options
+  });
+  
+  const result = response.choices[0].message.content;
+  
+  // Guardar en caché (24 horas)
+  await redis.setex(
+    `ai:${cacheKey}`,
+    86400,
+    JSON.stringify(result)
+  );
+  
+  return result;
+}
+
+// Uso
+const result = await cachedAIRequest(
+  "¿Cuál es la capital de Francia?",
+  { model: "gpt-4o-mini" }
+);</code></pre>
+                </div>
+
+                <h3>🎯 Mejores Prácticas de Optimización</h3>
+                <div class="success-box">
+                    <h4>✅ Checklist de Optimización:</h4>
+                    <ul>
+                        <li>☑️ <strong>Modelo adecuado:</strong> Usa GPT-4o-mini para tareas simples</li>
+                        <li>☑️ <strong>Temperatura correcta:</strong> 0.3 para consistencia, 0.7+ para creatividad</li>
+                        <li>☑️ <strong>Max tokens optimizado:</strong> No pidas más tokens de los necesarios</li>
+                        <li>☑️ <strong>System prompt eficiente:</strong> Instrucciones claras y concisas</li>
+                        <li>☑️ <strong>Few-shot cuando ayude:</strong> Proporciona ejemplos solo si mejoran resultado</li>
+                        <li>☑️ <strong>Streaming cuando sea posible:</strong> Mejor UX, mismo costo</li>
+                        <li>☑️ <strong>Monitoreo constante:</strong> Dashboards de uso y costos</li>
+                        <li>☑️ <strong>Alertas de gasto:</strong> Notificaciones cuando se exceden límites</li>
+                    </ul>
+                </div>
+
+                <h3>📈 Monitoreo y Analytics</h3>
+                <div class="warning-box">
+                    <h4>Métricas Clave a Seguir:</h4>
+                    <ul>
+                        <li><strong>Costo por request:</strong> Promedio de gasto por llamada</li>
+                        <li><strong>Cache hit rate:</strong> % de requests servidos desde caché</li>
+                        <li><strong>Tokens por request:</strong> Media de tokens consumidos</li>
+                        <li><strong>Latencia:</strong> Tiempo de respuesta (P50, P95, P99)</li>
+                        <li><strong>Error rate:</strong> % de llamadas fallidas</li>
+                        <li><strong>Cost per user:</strong> Gasto promedio por usuario activo</li>
+                    </ul>
+                </div>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📖 Cost Optimization</h4>
+                        <p>Guía oficial de optimización de costos</p>
+                        <a href="https://platform.openai.com/docs/guides/production-best-practices/optimizing-costs" target="_blank">Leer guía →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>⚡ Performance Tips</h4>
+                        <p>Mejores prácticas de rendimiento</p>
+                        <a href="https://platform.openai.com/docs/guides/production-best-practices" target="_blank">Ver tips →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: Resumen y Próximos Pasos -->
+            <div class="slide">
+                <h2>📚 Resumen y Conclusión del Módulo 4</h2>
+                
+                <h3>🎯 Lo que has dominado en este módulo</h3>
+                <div class="highlight-box">
+                    <ul style="margin-bottom: 0;">
+                        <li>✅ Integración de APIs de IA (OpenAI, Hugging Face, Google AI)</li>
+                        <li>✅ Procesamiento de lenguaje natural en aplicaciones reales</li>
+                        <li>✅ Visión por computador y análisis de imágenes</li>
+                        <li>✅ Sistemas de predicción con IA</li>
+                        <li>✅ Desarrollo de chatbots inteligentes</li>
+                        <li>✅ Análisis automático de imágenes y texto</li>
+                        <li>✅ Optimización de costos y rendimiento en producción</li>
+                    </ul>
+                </div>
+
+                <h3>📊 Proyectos Completados</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="number">70h</div>
+                        <div class="label">Horas Completadas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">3</div>
+                        <div class="label">Proyectos Prácticos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">10+</div>
+                        <div class="label">APIs Dominadas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">5</div>
+                        <div class="label">Casos de Uso Reales</div>
+                    </div>
+                </div>
+
+                <h3>🎓 Habilidades Técnicas Adquiridas</h3>
+                <div class="success-box">
+                    <h4>Competencias Profesionales:</h4>
+                    <ul>
+                        <li><strong>API Integration:</strong> Integración experta de múltiples APIs de IA</li>
+                        <li><strong>Full-Stack AI:</strong> Desarrollo completo de aplicaciones con IA</li>
+                        <li><strong>NLP Engineering:</strong> Procesamiento avanzado de lenguaje natural</li>
+                        <li><strong>Computer Vision:</strong> Implementación de análisis de imágenes</li>
+                        <li><strong>Predictive Systems:</strong> Sistemas de predicción y análisis de datos</li>
+                        <li><strong>Cost Optimization:</strong> Optimización de costos en producción</li>
+                        <li><strong>Production-Ready:</strong> Despliegue de aplicaciones IA escalables</li>
+                    </ul>
+                </div>
+
+                <h3>💼 Aplicaciones en el Mundo Real</h3>
+                <div class="info-box">
+                    <h4>Sectores donde puedes aplicar estas habilidades:</h4>
+                    <ul>
+                        <li><strong>E-commerce:</strong> Chatbots de atención, recomendaciones, análisis de reviews</li>
+                        <li><strong>Fintech:</strong> Detección de fraude, análisis de documentos, predicción de riesgo</li>
+                        <li><strong>Healthcare:</strong> Análisis de imágenes médicas, asistentes diagnósticos</li>
+                        <li><strong>Marketing:</strong> Análisis de sentimiento, generación de contenido, segmentación</li>
+                        <li><strong>Educación:</strong> Tutores virtuales, evaluación automática, contenido personalizado</li>
+                        <li><strong>Legal:</strong> Análisis de contratos, extracción de información, clasificación</li>
+                        <li><strong>Customer Service:</strong> Soporte automatizado, análisis de tickets, predicción churn</li>
+                    </ul>
+                </div>
+
+                <h3>📖 Recursos Adicionales para Profundizar</h3>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4>📚 OpenAI Cookbook</h4>
+                        <p>Recetas y ejemplos prácticos avanzados</p>
+                        <a href="https://github.com/openai/openai-cookbook" target="_blank">Explorar →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🎓 Advanced AI Course</h4>
+                        <p>Curso de DeepLearning.AI sobre APIs</p>
+                        <a href="https://www.deeplearning.ai/short-courses/" target="_blank">Ver cursos →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>💬 Community Forums</h4>
+                        <p>Foro de desarrolladores OpenAI</p>
+                        <a href="https://community.openai.com/" target="_blank">Unirse →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>📰 AI Newsletter</h4>
+                        <p>Actualizaciones semanales de APIs IA</p>
+                        <a href="https://www.aiweekly.co/" target="_blank">Suscribirse →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🛠️ Boilerplates</h4>
+                        <p>Templates para proyectos con IA</p>
+                        <a href="https://github.com/topics/openai-api" target="_blank">Ver templates →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4>📊 Cost Calculator</h4>
+                        <p>Calculadora de costos de OpenAI</p>
+                        <a href="https://openai.com/pricing" target="_blank">Calcular →</a>
+                    </div>
+                </div>
+
+                <h3>🚀 Próximos Pasos en tu Carrera con IA</h3>
+                <div class="warning-box">
+                    <h4>Recomendaciones para Continuar:</h4>
+                    <ol>
+                        <li><strong>Construye tu Portfolio:</strong> Crea 3-5 proyectos demo publicados en GitHub</li>
+                        <li><strong>Participa en Hackathons:</strong> Eventos de IA para ganar experiencia práctica</li>
+                        <li><strong>Contribuye a Open Source:</strong> Proyectos relacionados con IA/ML</li>
+                        <li><strong>Obtén Certificaciones:</strong> AWS ML, Google Cloud AI, Azure AI</li>
+                        <li><strong>Networking:</strong> Únete a comunidades de desarrolladores de IA</li>
+                        <li><strong>Blog/Content:</strong> Documenta tu aprendizaje y proyectos</li>
+                        <li><strong>Freelancing:</strong> Ofrece servicios de integración de APIs IA</li>
+                        <li><strong>Stay Updated:</strong> El campo avanza rápido, mantente al día</li>
+                    </ol>
+                </div>
+
+                <h3>✅ Checklist Final del Curso Completo</h3>
+                <div class="success-box">
+                    <h4>Has completado 4 módulos (250 horas totales):</h4>
+                    <ul>
+                        <li>☑️ <strong>Módulo 1 (30h):</strong> Fundamentos de IA en Programación</li>
+                        <li>☑️ <strong>Módulo 2 (80h):</strong> Generación y Optimización de Código</li>
+                        <li>☑️ <strong>Módulo 3 (70h):</strong> Testing, Debugging y Documentación</li>
+                        <li>☑️ <strong>Módulo 4 (70h):</strong> Desarrollo con APIs de IA</li>
+                    </ul>
+                    
+                    <h4 style="margin-top: 20px;">Estás preparado para:</h4>
+                    <ul>
+                        <li>✅ Desarrollar aplicaciones completas con IA integrada</li>
+                        <li>✅ Trabajar como AI Application Developer</li>
+                        <li>✅ Liderar proyectos de integración de IA</li>
+                        <li>✅ Optimizar y desplegar sistemas IA en producción</li>
+                        <li>✅ Asesorar en implementación de soluciones IA</li>
+                    </ul>
+                </div>
+
+                <h3>💡 Palabras Finales</h3>
+                <div class="info-box">
+                    <p><strong>La IA no es el futuro, es el presente.</strong> Las habilidades que has adquirido en este curso te posicionan en la vanguardia del desarrollo de software moderno.</p>
+                    
+                    <p>Recuerda: La IA es una herramienta poderosa que amplifica tus capacidades como desarrollador. El pensamiento crítico, la creatividad y el juicio humano siguen siendo insustituibles.</p>
+                    
+                    <p><strong>Continúa aprendiendo, experimentando y construyendo.</strong> El ecosistema de IA evoluciona constantemente, y tú ahora tienes las bases sólidas para crecer junto con él.</p>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; color: white;">
+                    <h2 style="color: white; border: none; margin: 0;">🎉 ¡Felicidades por completar el Curso Completo!</h2>
+                    <p style="font-size: 1.3em; margin-top: 15px; color: white; font-weight: 600;">
+                        Programación con IA para Desarrolladores Profesionales
+                    </p>
+                    <p style="font-size: 1.1em; margin-top: 10px; opacity: 0.9;">
+                        250 horas | 4 Módulos | 20+ Proyectos Prácticos
+                    </p>
+                    <p style="font-size: 1em; margin-top: 15px; opacity: 0.9;">
+                        Ahora estás equipado para liderar la revolución de la IA en el desarrollo de software
+                    </p>
+                    <div style="margin-top: 30px; font-size: 3em;">
+                        🚀 🤖 💻 ⚡ 🎯
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
  
  <script src="js/script.js"></script>   
 </body>
