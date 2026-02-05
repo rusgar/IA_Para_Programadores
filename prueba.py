@@ -1,30 +1,39 @@
-app.post('/api/usuarios/login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    
-    // Validaciones
-    if (!email || !password) {
-      return res.status(400).json({ error: 'Email y password requeridos' });
-    }
+from flask import Flask, request, jsonify
+import jwt
+import os
+from models import Usuario  # pyright: ignore[reportMissingImports] # Ajusta según tu estructura
 
-    const usuario = await Usuario.findOne({ email });
-    if (!usuario || !await usuario.compararPassword(password)) {
-      return res.status(401).json({ error: 'Credenciales inválidas' });
-    }
+app = Flask(__name__)
 
-    const token = jwt.sign({ id: usuario._id }, process.env.JWT_SECRET, 
-    
-    { expiresIn: '24h' });
-    
-    res.status(200).json({
-      token,
-      usuario: {
-        id: usuario._id,
-        nombre: usuario.nombre,
-        email: usuario.email
-      }
-    });
-  } catch (error) {
-    res.status(500).json({ error: 'Error en el servidor' });
-  }
-});
+@app.route('/api/usuarios/login', methods=['POST'])
+async def login():
+    try:
+        data = request.get_json()
+        email = data.get('email')
+        password = data.get('password')
+        
+        # Validaciones
+        if not email or not password:
+            return jsonify({'error': 'Email y password requeridos'}), 400
+
+        usuario = await Usuario.find_one({'email': email})
+        if not usuario or not await usuario.comparar_password(password):
+            return jsonify({'error': 'Credenciales inválidas'}), 401
+
+        token = jwt.encode(
+            {'id': str(usuario._id)}, 
+            os.environ.get('JWT_SECRET'), 
+            algorithm='HS256'
+        )
+        
+        return jsonify({
+            'token': token,
+            'usuario': {
+                'id': str(usuario._id),
+                'nombre': usuario.nombre,
+                'email': usuario.email
+            }
+        }), 200
+        
+    except Exception as error:
+        return jsonify({'error': 'Error en el servidor'}), 500
